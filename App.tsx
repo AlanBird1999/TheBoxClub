@@ -1,20 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
+import Login_Background from './Login_Background';
+import Login_Widget from './Login_Widget';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <KeyboardAvoidingView 
+      style={styles.content_container}
+      behavior='padding'
+    >
+      <Login_Background/>
+      <Text style={styles.login_page_boxie}>B O X I E</Text>
+      <View style={styles.signin_signup}>
+        <Login_Widget/>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  content_container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  login_page_boxie: {
+    fontSize: 50,
+    position: 'absolute',
+    top: '33%',
+  },
+  signin_signup: {
+    position: 'absolute',
+    top: '55%',
+  }
 });
