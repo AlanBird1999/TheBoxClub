@@ -4,8 +4,8 @@ import { StyleSheet, View } from 'react-native';
 export default function Login_Background() {
   return (
     <View style={styles.background_main_container}>
-      <View style={styles.background_color_blue}/>
-      <View style={styles.background_color_yellow}/>
+      <View style={styles.background_color_left}/>
+      <View style={styles.background_color_right}/>
     </View>
   );
 }
@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     zIndex: -1,
   },
-  background_color_blue: {
+  background_color_left: {
     backgroundColor: '#486BDB',
     flex: 1,
     zIndex: -1,
   },
-  background_color_yellow: {
+  background_color_right: {
     backgroundColor: '#49D19E',
     flex: 2,
     zIndex: -1,
