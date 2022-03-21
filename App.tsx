@@ -1,11 +1,6 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
-import Login_Background from './Login_Background';
-import Login_Screen from './Login_Screen';
-import Login_Widget from './Login_Widget';
+import React from "react";
+import Login_Screen from "./src/login/Login_Screen";
 
 export default function App() {
-  return (
-    <Login_Screen/>
-  );
+  return <Login_Screen />;
 }
