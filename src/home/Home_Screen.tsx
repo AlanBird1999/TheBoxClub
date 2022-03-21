@@ -6,33 +6,80 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
+  FlatList,
+  StatusBar
 } from "react-native";
 
-interface loginProps {
+interface homeProps {
   navigation: any;
 }
 
-export default function Home_Screen(props: loginProps) {
+const data = [
+    {
+        name: "Basement",
+        key: 1
+    },
+    {
+        name: "Storage Room",
+        key: 2
+    },
+    {
+        name: "Attic",
+        key: 3
+    },
+    {
+        name: "Garage",
+        key: 4
+    },
+    {
+        name: "Spare Room",
+        key: 5
+    },
+    {
+        name: "The Crypt",
+        key: 6
+    },
+    {
+        name: "Grandma's Attic",
+        key: 7
+    },
+    {
+        name: "Fruit Cellar",
+        key: 8
+    },
+    {
+        name: "Shed",
+        key: 9
+    },
+];
+
+export default function Home_Screen(props: homeProps) {
   return (
-    <KeyboardAvoidingView style={styles.content_container} behavior="padding">
-      <Text>Home Page</Text>
-    </KeyboardAvoidingView>
+    <View style={styles.container}>
+      <FlatList 
+      data={data}
+      renderItem={({ item }) => (
+          <Text style={styles.item}>{item.name}</Text>
+      )}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  content_container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  login_page_boxie: {
-    fontSize: 50,
-    position: "absolute",
-    top: "33%",
-  },
-  signin_signup: {
-    position: "absolute",
-    top: "55%",
-  },
-});
+    container: {
+      flex: 1,
+      paddingTop: 40,
+      paddingHorizontal: 20
+      //marginTop: StatusBar.currentHeight || 0,
+    },
+    item: {
+      marginTop: 24,
+      padding: 30,
+      backgroundColor: "skyblue",
+      fontSize: 24,
+    },
+    title: {
+      fontSize: 32,
+    },
+  });

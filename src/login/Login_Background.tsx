@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   background_color_left: {
-    backgroundColor: "#486BDB",
+    backgroundColor: "lightblue",
     flex: 1,
     zIndex: -1,
     resizeMode: "cover",
   },
   background_color_right: {
-    backgroundColor: "#49D19E",
+    backgroundColor: "white",
     flex: 2,
     zIndex: -1,
     resizeMode: "cover",
