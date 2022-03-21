@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   StyleSheet,
   View,
@@ -13,8 +15,8 @@ export default class Login_Widget extends Component {
   login() {
     //login logic here
   }
-  signUp() {
-    //sign up logic here
+  signUp(navigation: any) {
+    navigation.navigate("Home")
   }
 
   render() {

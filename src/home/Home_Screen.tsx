@@ -7,21 +7,15 @@ import {
   Image,
   KeyboardAvoidingView,
 } from "react-native";
-import Login_Background from "./Login_Background";
-import Login_Widget from "./Login_Widget";
 
 interface loginProps {
   navigation: any;
 }
 
-export default function Login_Screen(props: loginProps) {
+export default function Home_Screen(props: loginProps) {
   return (
     <KeyboardAvoidingView style={styles.content_container} behavior="padding">
-      <Login_Background />
-      <Text style={styles.login_page_boxie} onPress={() => props.navigation.navigate("Home")}>B O X I E</Text>
-      <View style={styles.signin_signup}>
-        <Login_Widget />
-      </View>
+      <Text>Home Page</Text>
     </KeyboardAvoidingView>
   );
 }
