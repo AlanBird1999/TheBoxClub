@@ -1,11 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
+import Amplify from "aws-amplify";
+//import "@aws-amplify/ui-react/styles.css";
+import awsconfig from "./src/aws-exports";
+import { Authenticator } from "@aws-amplify/ui-react";
 
+Amplify.configure(awsconfig);
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <Text>Hello world finally</Text>
     </View>
   );
 }
@@ -13,8 +16,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

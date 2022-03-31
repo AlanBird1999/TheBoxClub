@@ -1,0 +1,31 @@
+type Item @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Description: String
+  iName: String!
+  Photo: String
+}
+
+type Container @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Place: String
+  placeID: ID! @index(name: "byPlace")
+}
+
+type Residence @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  rName: String
+  users: [User] @manyToMany(relationName: "UserResidence")
+  Place: Place @hasOne
+}
+
+type Place @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  pName: String!
+  Containers: [Container] @hasMany(indexName: "byPlace", fields: ["id"])
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  UserName: String
+  Residences: [Residence] @manyToMany(relationName: "UserResidence")
+}
