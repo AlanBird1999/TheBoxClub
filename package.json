@@ -10,10 +10,16 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^4.5.0",
+    "@aws-amplify/core": "^4.5.0",
     "@aws-amplify/ui-react": "^2.12.0",
     "@react-native-async-storage/async-storage": "^1.17.3",
+    "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/netinfo": "^8.2.0",
     "@react-native-picker/picker": "^2.4.0",
+    "@react-navigation/native": "^6.0.10",
+    "@react-navigation/native-stack": "^6.6.1",
+    "@react-navigation/stack": "^6.2.1",
     "aws-amplify": "^4.3.18",
     "aws-amplify-react-native": "^6.0.4",
     "expo": "~44.0.0",
@@ -21,6 +27,10 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-gesture-handler": "~2.1.0",
+    "react-native-reanimated": "~2.3.1",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.10.1",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
