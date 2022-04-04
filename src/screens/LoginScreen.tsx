@@ -31,17 +31,31 @@ function changeText(key: string, value: string) {
 function login() {
     var logIn = new Promise((resolve, reject) => {
         Auth.signIn
+    });
+    logIn.then(() => {
+        Alert.alert(
+            "Login Success!",
+            "You successfully logged in to Boxie!",
+            [
+                {
+                    text: "OK",
+                    style: "cancel"
+                }
+            ]
+        )
     })
-    Alert.alert(
-        "Login Pressed!",
-        "You pressed the Login button",
-        [
-            {
-                text: "OK",
-                style: "cancel"
-            }
-        ]
-    )
+    .catch(error => {
+        Alert.alert(
+            "Sign In Error",
+            error,
+            [
+                {
+                    text: "OK",
+                    style: "cancel"
+                }
+            ]
+        )
+    })
 }
 
 function signUp() {
