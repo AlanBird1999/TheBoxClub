@@ -1,14 +1,18 @@
-/* 
+/*************************************************************
     This file will be upated to be a tab-based navigation for
     SignIn and SignUp screens. At this stage, we are just
     getting things to work
-                                                            */
+ *************************************************************/
 
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Amplify, { Auth } from 'aws-amplify';
 import AWSConfig from '../aws-exports';
 
 Amplify.configure(AWSConfig);
+
+interface loginProps {
+    navigation: any
+}
 
 var state = {
     username: '',
@@ -28,11 +32,15 @@ function changeText(key: string, value: string) {
     }
 }
 
-function login() {
+function login(nav: any) {
     var logIn = new Promise((resolve, reject) => {
-        Auth.signIn
+        Auth.signIn({
+            username: state.username, 
+            password: state.password
+        });
     });
     logIn.then(() => {
+        nav.navigate("Home");
         Alert.alert(
             "Login Success!",
             "You successfully logged in to Boxie!",
@@ -42,7 +50,7 @@ function login() {
                     style: "cancel"
                 }
             ]
-        )
+        );
     })
     .catch(error => {
         Alert.alert(
@@ -130,10 +138,14 @@ function confirmSignUp() {
         })
 }
 
-export default function LoginScreen() {
+export default function LoginScreen(props: loginProps) {
     return (
         <KeyboardAvoidingView style = {styles.container} behavior='padding'>
-            <Text style={styles.title}>B O X I E</Text>
+            <Text 
+            style={styles.title}
+            onPress={() => props.navigation.navigate("Home")}>
+                B O X I E
+            </Text>
             <TextInput
                 style = {styles.input}
                 placeholder='Email Address'
@@ -147,7 +159,7 @@ export default function LoginScreen() {
                 secureTextEntry={true}
                 onChangeText={value => changeText('password', value)}
             />
-            <TouchableOpacity onPress={login} style={styles.button}>
+            <TouchableOpacity onPress={() => login(props.navigation)} style={styles.button}>
                 <Text>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={signUp} style={styles.button}>
