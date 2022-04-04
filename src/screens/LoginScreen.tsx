@@ -38,13 +38,10 @@ function changeText(key: string, value: string) {
 }
 
 function login(nav: any) {
-  var logIn = new Promise((resolve, reject) => {
-    Auth.signIn({
-      username: state.username,
-      password: state.password,
-    });
-  });
-  logIn
+  Auth.signIn({
+    username: state.username,
+    password: state.password,
+  })
     .then(() => {
       nav.navigate("Home");
       Alert.alert("Login Success!", "You successfully logged in to Boxie!", [
