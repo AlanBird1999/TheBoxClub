@@ -1,8 +1,4 @@
-/* 
-    This file will be upated to be a tab-based navigation for
-    SignIn and SignUp screens. At this stage, we are just
-    getting things to work
-                                                            */
+/* This file will be changed to ONLY perform sign ups */
 
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Amplify, { Auth } from 'aws-amplify';
