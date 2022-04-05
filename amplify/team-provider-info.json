@@ -16,18 +16,5 @@
         "Boxie": {}
       }
     }
-  },
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-boxie-dev-132638-authRole",
-      "UnauthRoleArn": "arn:aws:iam::042482157670:role/amplify-boxie-dev-132638-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::042482157670:role/amplify-boxie-dev-132638-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-boxie-dev-132638-deployment",
-      "UnauthRoleName": "amplify-boxie-dev-132638-unauthRole",
-      "StackName": "amplify-boxie-dev-132638",
-      "StackId": "arn:aws:cloudformation:us-east-1:042482157670:stack/amplify-boxie-dev-132638/7e850de0-b128-11ec-a6b6-127c4ae49d53",
-      "AmplifyAppId": "d3i80onc78hnyj"
-    }
   }
 }
