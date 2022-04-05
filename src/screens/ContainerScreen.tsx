@@ -31,6 +31,7 @@ export default function ContainerScreen(props: any) {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    paddingBottom: 0,
     flex: 1,
   },
   input: {

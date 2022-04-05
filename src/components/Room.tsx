@@ -23,7 +23,6 @@ export default function Room(props: nameProps) {
 
 function openContainers(containers: any, nav: any) {
   nav.navigate("ContainerScreen", { containers });
-  Alert.alert(`You pressed this button`);
 }
 
 const styles = StyleSheet.create({

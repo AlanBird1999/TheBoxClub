@@ -43,7 +43,7 @@ function login(nav: any) {
     password: state.password,
   })
     .then(() => {
-      nav.navigate("Home");
+      nav.navigate("TabNav");
       Alert.alert("Login Success!", "You successfully logged in to Boxie!", [
         {
           text: "OK",
@@ -129,7 +129,7 @@ export default function LoginScreen(props: loginProps) {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text
         style={styles.title}
-        onPress={() => props.navigation.navigate("Home")}
+        onPress={() => props.navigation.navigate("TabNav")}
       >
         B O X I E
       </Text>
