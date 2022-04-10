@@ -4,6 +4,8 @@ import LoginScreen from "../screens/LoginScreen";
 import CScanner from "../components/CScanner";
 import HomeScreen from "./HomeScreen";
 import ItemNavigation from "./ItemNavigation";
+import AddItemScreen from "./AddItem/AddItemScreen";
+import AddItemNavigation from "./AddItem/AddItemNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +18,17 @@ export function TabNavigator() {
         headerShown: false,
       }}
     >
+      <Tab.Screen
+        name="AddItemNavigation"
+        component={AddItemNavigation}
+        options={{
+          tabBarLabel: () => null,
+          tabBarButton: () => null,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="plus" color={color} size={size} />
+          ),
+        }}
+      ></Tab.Screen>
       <Tab.Screen
         name="Home"
         component={ItemNavigation}

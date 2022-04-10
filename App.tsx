@@ -17,8 +17,6 @@ export default function App_Navigator() {
       >
         <Stack.Screen name="Login" component={Login_Screen} />
         <Stack.Screen name="TabNav" component={TabNavigator} />
-        {/* <Stack.Screen name="Home" component={Home_Screen} />
-        <Stack.Screen name="ContainerScreen" component={Container_Screen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
