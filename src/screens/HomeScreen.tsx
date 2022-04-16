@@ -2,11 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
-  ScrollView,
   FlatList,
-  Alert,
   TouchableOpacity,
 } from "react-native";
 import Amplify, { Auth } from "aws-amplify";
@@ -85,42 +81,126 @@ const data = [
   {
     name: "Basement",
     containers: [
-      { name: "Box 1", key: 1 },
-      { name: "Box 2", key: 2 },
+      {
+        name: "Box 1",
+        key: 1,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Box 2",
+        key: 2,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
     ],
     key: 1,
   },
   {
     name: "Storage Room",
     containers: [
-      { name: "Box 1", key: 1 },
-      { name: "Box 2", key: 2 },
-      { name: "Box 3", key: 3 },
-      { name: "Box 4", key: 4 },
+      {
+        name: "Box 1",
+        key: 1,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Box 2",
+        key: 2,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Box 3",
+        key: 3,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Box 4",
+        key: 4,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
     ],
     key: 2,
   },
   {
     name: "Attic",
     containers: [
-      { name: "Christmas Box", key: 1 },
-      { name: "Haloween", key: 2 },
+      {
+        name: "Christmas Box",
+        key: 1,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Haloween",
+        key: 2,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
     ],
     key: 3,
   },
   {
     name: "Garage",
     containers: [
-      { name: "Tool Box", key: 1 },
-      { name: "Car parts", key: 2 },
+      {
+        name: "Tool Box",
+        key: 1,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Car parts",
+        key: 2,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
     ],
     key: 4,
   },
   {
     name: "Spare Room",
     containers: [
-      { name: "Decorations", key: 1 },
-      { name: "Blankets", key: 2 },
+      {
+        name: "Decorations",
+        key: 1,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Blankets",
+        key: 2,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
     ],
     key: 5,
   },
@@ -132,24 +212,24 @@ const data = [
   {
     name: "Grandma's Attic",
     containers: [
-      { name: "Box 1", key: 1 },
-      { name: "Box 2", key: 2 },
+      { name: "Box 1", key: 1, items: [] },
+      { name: "Box 2", key: 2, items: [] },
     ],
     key: 7,
   },
   {
     name: "Fruit Cellar",
     containers: [
-      { name: "Orange", key: 1 },
-      { name: "Apples", key: 2 },
+      { name: "Orange", key: 1, items: [] },
+      { name: "Apples", key: 2, items: [] },
     ],
     key: 8,
   },
   {
     name: "Shed",
     containers: [
-      { name: "Orange", key: 1 },
-      { name: "Apples", key: 2 },
+      { name: "Orange", key: 1, items: [] },
+      { name: "Apples", key: 2, items: [] },
     ],
     key: 9,
   },
