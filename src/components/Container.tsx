@@ -1,27 +1,35 @@
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageURISource,
+} from "react-native";
 import Amplify from "aws-amplify";
 import AWSConfig from "../aws-exports";
-import { useNavigation } from "@react-navigation/native";
 
 Amplify.configure(AWSConfig);
 
 interface containerProps {
   name: string;
   navigation: any;
+  items: { name: string; description: string; image?: ImageURISource }[];
 }
 
 export default function Container(props: containerProps) {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => openItem(props.name)}
+      onPress={() => openItems(props.items, props.navigation)}
     >
       <Text style={styles.roomName}>{props.name}</Text>
     </TouchableOpacity>
   );
 }
 
-function openItem(name: string) {}
+function openItems(items: any, navigation: any) {
+  console.log("pressed open items");
+  navigation.navigate("ItemScreen", { items });
+}
 
 const styles = StyleSheet.create({
   container: {

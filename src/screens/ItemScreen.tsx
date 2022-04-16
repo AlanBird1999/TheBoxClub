@@ -1,31 +1,24 @@
 import { StyleSheet, View, FlatList, ImageURISource } from "react-native";
-import Container from "../components/Container";
+import Item from "../components/Item";
 
-interface containerProps {
+interface itemProps {
   route: {
     params: {
-      containers: {
-        name: string;
-        key: number;
-        items: { name: string; description: string; image?: ImageURISource }[];
-      }[];
+      items: { name: string; description: string; image?: ImageURISource }[];
     };
   };
   navigation: any;
 }
 
-export default function ContainerScreen(props: containerProps) {
+export default function ItemScreen(props: itemProps) {
+  console.log("entered item screen, props:", props.route.params);
   return (
     <View style={styles.container}>
       <FlatList
         numColumns={2}
-        data={props.route.params.containers}
+        data={props.route.params.items}
         renderItem={({ item }) => (
-          <Container
-            name={item.name}
-            navigation={props.navigation}
-            items={item.items}
-          ></Container>
+          <Item navigation={props.navigation} item={item}></Item>
         )}
       />
     </View>
