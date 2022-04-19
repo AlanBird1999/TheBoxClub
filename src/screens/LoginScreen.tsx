@@ -139,7 +139,7 @@ export default function LoginScreen(props: loginProps) {
         <ScrollView keyboardShouldPersistTaps="handled">
           <Text
             style={styles.title}
-            onPress={() => props.navigation.navigate("TabNav")}
+            onPress={() => props.navigation.replace("TabNav")}
           >
             B O X I E
           </Text>

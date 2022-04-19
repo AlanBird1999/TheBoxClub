@@ -50,7 +50,10 @@ function login(nav: any) {
     password: state.password,
   })
     .then(() => {
-      nav.navigate("TabNav");
+      nav.reset({
+        index: 0,
+        routes: [{ name: "TabNav" }],
+      });
       Alert.alert("Login Success!", "You successfully logged in to Boxie!", [
         {
           text: "OK",
@@ -59,7 +62,7 @@ function login(nav: any) {
       ]);
     })
     .catch((error) => {
-      Alert.alert("Sign In Error", error, [
+      Alert.alert("Sign In Error", error.message, [
         {
           text: "OK",
           style: "cancel",
@@ -175,8 +178,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   scrollv: {
-    flexGrow: 1, 
-    justifyContent: 'center'
+    flexGrow: 1,
+    justifyContent: "center",
   },
   input: {
     height: 50,
