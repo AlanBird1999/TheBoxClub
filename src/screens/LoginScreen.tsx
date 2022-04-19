@@ -7,13 +7,19 @@
 import {
   StyleSheet,
   Text,
+  View,
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
   Alert,
+  Keyboard,
 } from "react-native";
 import Amplify, { Auth } from "aws-amplify";
 import AWSConfig from "../aws-exports";
+import {
+  ScrollView,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 Amplify.configure(AWSConfig);
@@ -129,43 +135,29 @@ function confirmSignUp() {
 export default function LoginScreen(props: loginProps) {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <Text
-        style={styles.title}
-        onPress={() => props.navigation.replace("TabNav")}
-      >
-        B O X I E
-      </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email Address"
-        keyboardType="email-address"
-        onChangeText={(value) => changeText("username", value)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        keyboardType="default"
-        secureTextEntry={true}
-        onChangeText={(value) => changeText("password", value)}
-      />
-      <TouchableOpacity
-        onPress={() => login(props.navigation)}
-        style={styles.button}
-      >
-        <Text>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={signUp} style={styles.button}>
-        <Text>Sign Up</Text>
-      </TouchableOpacity>
-      <TextInput
-        style={styles.input}
-        placeholder="Confirmation Code (for sign up)"
-        keyboardType="default"
-        onChangeText={(value) => changeText("confirmation", value)}
-      />
-      <TouchableOpacity onPress={confirmSignUp} style={styles.button}>
-        <Text>Confirm Sign Up</Text>
-      </TouchableOpacity>
+      <SafeAreaView>
+        <ScrollView keyboardShouldPersistTaps="handled">
+          <Text
+            style={styles.title}
+            onPress={() => props.navigation.navigate("TabNav")}
+          >
+            B O X I E
+          </Text>
+
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("SignIn")}
+            style={styles.button}
+          >
+            <Text>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("SignUp")}
+            style={styles.button}
+          >
+            <Text>Sign Up</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 }
@@ -190,5 +182,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 45,
     alignSelf: "center",
+    paddingBottom: 10,
   },
 });
