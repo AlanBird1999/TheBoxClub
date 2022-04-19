@@ -50,7 +50,6 @@ function login(nav: any) {
     password: state.password,
   })
     .then(() => {
-      console.log("returned from sign in");
       nav.replace("TabNav");
       Alert.alert("Login Success!", "You successfully logged in to Boxie!", [
         {
