@@ -111,8 +111,8 @@ function confirmSignUp() {
   confirm
     .then(() => {
       Alert.alert(
-        "Now let's confirm",
-        "Check your email for a verification code",
+        "Account registered!",
+        "Welcome to Boxie!",
         [
           {
             text: "OK",
@@ -120,6 +120,10 @@ function confirmSignUp() {
           },
         ]
       );
+      Auth.signIn({
+        username: state.username,
+        password: state.password,
+      });
     })
     .catch((error) => {
       Alert.alert("Error in confirmation code", error, [
