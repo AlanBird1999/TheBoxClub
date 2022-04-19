@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import Amplify, { Auth } from "aws-amplify";
 import AWSConfig from "../aws-exports";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 Amplify.configure(AWSConfig);
 
@@ -43,7 +44,8 @@ function login(nav: any) {
     password: state.password,
   })
     .then(() => {
-      nav.navigate("TabNav");
+      console.log("returned from sign in");
+      nav.replace("TabNav");
       Alert.alert("Login Success!", "You successfully logged in to Boxie!", [
         {
           text: "OK",
@@ -52,7 +54,7 @@ function login(nav: any) {
       ]);
     })
     .catch((error) => {
-      Alert.alert("Sign In Error", error, [
+      Alert.alert("Sign In Error", error.message, [
         {
           text: "OK",
           style: "cancel",
@@ -129,7 +131,7 @@ export default function LoginScreen(props: loginProps) {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text
         style={styles.title}
-        onPress={() => props.navigation.navigate("TabNav")}
+        onPress={() => props.navigation.replace("TabNav")}
       >
         B O X I E
       </Text>

@@ -5,6 +5,7 @@ import Home_Screen from "./src/screens/HomeScreen";
 import Login_Screen from "./src/screens/LoginScreen";
 import { TabNavigator } from "./src/screens/TabNavigator";
 import Container_Screen from "./src/screens/ContainerScreen";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Stack = createNativeStackNavigator();
 
