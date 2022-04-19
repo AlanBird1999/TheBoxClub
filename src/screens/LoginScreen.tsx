@@ -136,27 +136,25 @@ export default function LoginScreen(props: loginProps) {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <SafeAreaView>
-        <ScrollView keyboardShouldPersistTaps="handled">
-          <Text
-            style={styles.title}
-            onPress={() => props.navigation.replace("TabNav")}
-          >
-            B O X I E
-          </Text>
+        <Text
+          style={styles.title}
+          onPress={() => props.navigation.replace("TabNav")}
+        >
+          B O X I E
+        </Text>
 
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("SignIn")}
-            style={styles.button}
-          >
-            <Text>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("SignUp")}
-            style={styles.button}
-          >
-            <Text>Sign Up</Text>
-          </TouchableOpacity>
-        </ScrollView>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate("SignIn")}
+          style={styles.button}
+        >
+          <Text>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate("SignUp")}
+          style={styles.button}
+        >
+          <Text>Sign Up</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
