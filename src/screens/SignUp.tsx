@@ -50,7 +50,10 @@ function login(nav: any) {
     password: state.password,
   })
     .then(() => {
-      nav.navigate("TabNav");
+      nav.reset({
+        index: 0,
+        routes: [{ name: "TabNav" }],
+      });
       Alert.alert("Login Success!", "You successfully logged in to Boxie!", [
         {
           text: "OK",
@@ -94,7 +97,7 @@ function signUp() {
       Auth.confirmSignUp(state.username, state.confirmation);
     })
     .catch((error) => {
-      Alert.alert("Sign Up Error", error, [
+      Alert.alert("Sign Up Error", error.message, [
         {
           text: "OK",
           style: "cancel",
@@ -110,16 +113,12 @@ function confirmSignUp() {
 
   confirm
     .then(() => {
-      Alert.alert(
-        "Account registered!",
-        "Welcome to Boxie!",
-        [
-          {
-            text: "OK",
-            style: "cancel",
-          },
-        ]
-      );
+      Alert.alert("Account registered!", "Welcome to Boxie!", [
+        {
+          text: "OK",
+          style: "cancel",
+        },
+      ]);
       Auth.signIn({
         username: state.username,
         password: state.password,

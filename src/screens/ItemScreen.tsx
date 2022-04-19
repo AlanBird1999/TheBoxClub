@@ -11,7 +11,6 @@ interface itemProps {
 }
 
 export default function ItemScreen(props: itemProps) {
-  console.log("entered item screen, props:", props.route.params);
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
