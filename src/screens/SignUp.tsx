@@ -69,17 +69,13 @@ function login(nav: any) {
 }
 
 function signUp() {
-  var registerUser = new Promise((resolve, reject) => {
     Auth.signUp({
       username: state.username,
       password: state.password,
       attributes: {
         email: state.username,
       },
-    });
-  });
-
-  registerUser
+    })
     .then(() => {
       Alert.alert(
         "Now let's confirm",
@@ -103,12 +99,10 @@ function signUp() {
     });
 }
 
-function confirmSignUp() {
-  var confirm = new Promise((resolve, reject) => {
-    Auth.confirmSignUp(state.username, state.confirmation);
-  });
+function confirmSignUp(nav: any) {
 
-  confirm
+    Auth.confirmSignUp(state.username, state.confirmation)
+
     .then(() => {
       Alert.alert(
         "Account registered!",
@@ -120,10 +114,7 @@ function confirmSignUp() {
           },
         ]
       );
-      Auth.signIn({
-        username: state.username,
-        password: state.password,
-      });
+      login(nav);
     })
     .catch((error) => {
       Alert.alert("Error in confirmation code", error, [
@@ -170,7 +161,7 @@ export default function LoginScreen(props: loginProps) {
                 keyboardType="default"
                 onChangeText={(value) => changeText("confirmation", value)}
               />
-              <TouchableOpacity onPress={confirmSignUp} style={styles.button}>
+              <TouchableOpacity onPress={() => confirmSignUp(props.navigation)} style={styles.button}>
                 <Text>Confirm Sign Up</Text>
               </TouchableOpacity>
             </ScrollView>
