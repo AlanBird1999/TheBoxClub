@@ -12,7 +12,6 @@ interface itemViewProps {
 }
 
 export default function ItemView(props: itemViewProps) {
-  console.log(props.route.params);
   return (
     <SafeAreaView style={styles.container}>
       <Image

@@ -7,6 +7,7 @@ import SignIn from "./src/screens/SignIn";
 import SignUp from "./src/screens/SignUp";
 import { TabNavigator } from "./src/screens/TabNavigator";
 import Container_Screen from "./src/screens/ContainerScreen";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Stack = createNativeStackNavigator();
 
