@@ -11,7 +11,6 @@ export default function ProfileScreen(props: profileProps) {
   var [userEmail, setUserEmail] = useState("Loading");
   Auth.currentUserInfo()
     .then((userInfo) => {
-      console.log("set loading to false", userInfo);
       setUserEmail(userInfo.attributes.email);
     })
     .catch((error) => {

@@ -27,7 +27,6 @@ export default function Container(props: containerProps) {
 }
 
 function openItems(items: any, navigation: any) {
-  console.log("pressed open items");
   navigation.navigate("ItemScreen", { items });
 }
 
