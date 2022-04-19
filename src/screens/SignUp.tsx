@@ -1,17 +1,32 @@
-/* This file will be changed to ONLY perform sign ups */
+/*************************************************************
+    This file will be upated to be a tab-based navigation for
+    SignIn and SignUp screens. At this stage, we are just
+    getting things to work
+ *************************************************************/
 
 import {
   StyleSheet,
   Text,
+  View,
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
   Alert,
+  Keyboard,
 } from "react-native";
 import Amplify, { Auth } from "aws-amplify";
 import AWSConfig from "../aws-exports";
+import {
+  ScrollView,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 Amplify.configure(AWSConfig);
+
+interface loginProps {
+  navigation: any;
+}
 
 var state = {
   username: "",
@@ -29,16 +44,28 @@ function changeText(key: string, value: string) {
   }
 }
 
-function login() {
-  var logIn = new Promise((resolve, reject) => {
-    Auth.signIn;
-  });
-  Alert.alert("Login Pressed!", "You pressed the Login button", [
-    {
-      text: "OK",
-      style: "cancel",
-    },
-  ]);
+function login(nav: any) {
+  Auth.signIn({
+    username: state.username,
+    password: state.password,
+  })
+    .then(() => {
+      nav.navigate("TabNav");
+      Alert.alert("Login Success!", "You successfully logged in to Boxie!", [
+        {
+          text: "OK",
+          style: "cancel",
+        },
+      ]);
+    })
+    .catch((error) => {
+      Alert.alert("Sign In Error", error, [
+        {
+          text: "OK",
+          style: "cancel",
+        },
+      ]);
+    });
 }
 
 function signUp() {
@@ -104,45 +131,59 @@ function confirmSignUp() {
     });
 }
 
-export default function LoginScreen() {
+export default function LoginScreen(props: loginProps) {
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <Text style={styles.title}>B O X I E</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email Address"
-        keyboardType="email-address"
-        onChangeText={(value) => changeText("username", value)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        keyboardType="default"
-        secureTextEntry={true}
-        onChangeText={(value) => changeText("password", value)}
-      />
-      <TouchableOpacity onPress={login} style={styles.button}>
-        <Text>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={signUp} style={styles.button}>
-        <Text>Sign Up</Text>
-      </TouchableOpacity>
-      <TextInput
-        style={styles.input}
-        placeholder="Confirmation Code (for sign up)"
-        keyboardType="default"
-        onChangeText={(value) => changeText("confirmation", value)}
-      />
-      <TouchableOpacity onPress={confirmSignUp} style={styles.button}>
-        <Text>Confirm Sign Up</Text>
-      </TouchableOpacity>
-    </KeyboardAvoidingView>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollv}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <SafeAreaView>
+            <ScrollView keyboardShouldPersistTaps="handled">
+              <Text
+                style={styles.title}
+                onPress={() => props.navigation.navigate("TabNav")}
+              >
+                B O X I E
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Email Address"
+                keyboardType="email-address"
+                onChangeText={(value) => changeText("username", value)}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                keyboardType="default"
+                secureTextEntry={true}
+                onChangeText={(value) => changeText("password", value)}
+              />
+              <TouchableOpacity onPress={signUp} style={styles.button}>
+                <Text>Sign Up</Text>
+              </TouchableOpacity>
+              <TextInput
+                style={styles.input}
+                placeholder="Confirmation Code (for sign up)"
+                keyboardType="default"
+                onChangeText={(value) => changeText("confirmation", value)}
+              />
+              <TouchableOpacity onPress={confirmSignUp} style={styles.button}>
+                <Text>Confirm Sign Up</Text>
+              </TouchableOpacity>
+            </ScrollView>
+          </SafeAreaView>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+  },
+  scrollv: {
+    flexGrow: 1,
     justifyContent: "center",
   },
   input: {

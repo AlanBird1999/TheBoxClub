@@ -2,6 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
+  SafeAreaView,
   FlatList,
   TouchableOpacity,
 } from "react-native";
@@ -18,7 +19,7 @@ interface homeProps {
 
 export default function HomeScreen(props: homeProps) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         numColumns={2}
         data={data}
@@ -38,7 +39,7 @@ export default function HomeScreen(props: homeProps) {
           <Text style={styles.icon}>+</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
     flex: 1,
+    alignItems: 'center',
   },
   input: {
     height: 50,
