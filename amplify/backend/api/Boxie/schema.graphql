@@ -29,3 +29,4 @@ type User @model @auth(rules: [{allow: public}]) {
   UserName: String
   Residences: [Residence] @manyToMany(relationName: "UserResidence")
 }
+ 
