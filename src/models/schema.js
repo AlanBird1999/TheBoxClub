@@ -31,6 +31,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "containerID": {
+                    "name": "containerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -54,6 +61,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byContainer",
+                        "fields": [
+                            "containerID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -96,6 +112,20 @@ export const schema = {
                     "type": "ID",
                     "isRequired": true,
                     "attributes": []
+                },
+                "Items": {
+                    "name": "Items",
+                    "isArray": true,
+                    "type": {
+                        "model": "Item"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "containerID"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -453,5 +483,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "b157f570d5ce0f8a5396b5b3aa446c8a"
+    "version": "6d152dc75c5c5d1ed7f2817e858e00fd"
 };

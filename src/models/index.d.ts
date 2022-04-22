@@ -33,6 +33,7 @@ export declare class Item {
   readonly Description?: string | null;
   readonly iName: string;
   readonly Photo?: string | null;
+  readonly containerID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Item, ItemMetaData>);
@@ -43,6 +44,7 @@ export declare class Container {
   readonly id: string;
   readonly Place?: string | null;
   readonly placeID: string;
+  readonly Items?: (Item | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Container, ContainerMetaData>);

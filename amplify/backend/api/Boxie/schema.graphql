@@ -3,12 +3,14 @@ type Item @model @auth(rules: [{allow: public}]) {
   Description: String
   iName: String!
   Photo: String
+  containerID: ID! @index(name: "byContainer")
 }
 
 type Container @model @auth(rules: [{allow: public}]) {
   id: ID!
   Place: String
   placeID: ID! @index(name: "byPlace")
+  Items: [Item] @hasMany(indexName: "byContainer", fields: ["id"])
 }
 
 type Residence @model @auth(rules: [{allow: public}]) {
