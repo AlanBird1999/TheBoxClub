@@ -9,6 +9,7 @@ export const onCreateItem = /* GraphQL */ `
       Description
       iName
       Photo
+      containerID
       createdAt
       updatedAt
       _version
@@ -24,6 +25,7 @@ export const onUpdateItem = /* GraphQL */ `
       Description
       iName
       Photo
+      containerID
       createdAt
       updatedAt
       _version
@@ -39,6 +41,7 @@ export const onDeleteItem = /* GraphQL */ `
       Description
       iName
       Photo
+      containerID
       createdAt
       updatedAt
       _version
@@ -53,6 +56,10 @@ export const onCreateContainer = /* GraphQL */ `
       id
       Place
       placeID
+      Items {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -67,6 +74,10 @@ export const onUpdateContainer = /* GraphQL */ `
       id
       Place
       placeID
+      Items {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -81,6 +92,10 @@ export const onDeleteContainer = /* GraphQL */ `
       id
       Place
       placeID
+      Items {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -94,25 +109,15 @@ export const onCreateResidence = /* GraphQL */ `
     onCreateResidence {
       id
       rName
-      users {
+      Places {
         nextToken
         startedAt
-      }
-      Place {
-        id
-        pName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      residencePlaceId
     }
   }
 `;
@@ -121,25 +126,15 @@ export const onUpdateResidence = /* GraphQL */ `
     onUpdateResidence {
       id
       rName
-      users {
+      Places {
         nextToken
         startedAt
-      }
-      Place {
-        id
-        pName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      residencePlaceId
     }
   }
 `;
@@ -148,25 +143,15 @@ export const onDeleteResidence = /* GraphQL */ `
     onDeleteResidence {
       id
       rName
-      users {
+      Places {
         nextToken
         startedAt
-      }
-      Place {
-        id
-        pName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      residencePlaceId
     }
   }
 `;
@@ -179,6 +164,7 @@ export const onCreatePlace = /* GraphQL */ `
         nextToken
         startedAt
       }
+      residenceID
       createdAt
       updatedAt
       _version
@@ -196,6 +182,7 @@ export const onUpdatePlace = /* GraphQL */ `
         nextToken
         startedAt
       }
+      residenceID
       createdAt
       updatedAt
       _version
@@ -213,6 +200,7 @@ export const onDeletePlace = /* GraphQL */ `
         nextToken
         startedAt
       }
+      residenceID
       createdAt
       updatedAt
       _version
@@ -227,14 +215,20 @@ export const onCreateUser = /* GraphQL */ `
       id
       UserName
       Residences {
-        nextToken
-        startedAt
+        id
+        rName
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      userResidencesId
     }
   }
 `;
@@ -244,14 +238,20 @@ export const onUpdateUser = /* GraphQL */ `
       id
       UserName
       Residences {
-        nextToken
-        startedAt
+        id
+        rName
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      userResidencesId
     }
   }
 `;
@@ -261,24 +261,6 @@ export const onDeleteUser = /* GraphQL */ `
       id
       UserName
       Residences {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateUserResidence = /* GraphQL */ `
-  subscription OnCreateUserResidence {
-    onCreateUserResidence {
-      id
-      residenceID
-      userID
-      residence {
         id
         rName
         createdAt
@@ -286,88 +268,13 @@ export const onCreateUserResidence = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        residencePlaceId
-      }
-      user {
-        id
-        UserName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-    }
-  }
-`;
-export const onUpdateUserResidence = /* GraphQL */ `
-  subscription OnUpdateUserResidence {
-    onUpdateUserResidence {
-      id
-      residenceID
-      userID
-      residence {
-        id
-        rName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        residencePlaceId
-      }
-      user {
-        id
-        UserName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteUserResidence = /* GraphQL */ `
-  subscription OnDeleteUserResidence {
-    onDeleteUserResidence {
-      id
-      residenceID
-      userID
-      residence {
-        id
-        rName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        residencePlaceId
-      }
-      user {
-        id
-        UserName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+      userResidencesId
     }
   }
 `;

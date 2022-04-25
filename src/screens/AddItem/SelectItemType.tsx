@@ -11,6 +11,7 @@ interface selectItemProps {
 }
 
 export default function SelectItemType(props: selectItemProps) {
+  console.log("select item type props: ", props);
   return (
     <View style={styles.container}>
       <Text>What would you like to add?</Text>

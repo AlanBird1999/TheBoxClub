@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "Boxie",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-7ab963af-93bc-4868-8418-bb3a28f54e53/amplify/backend/api/Boxie/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-a8d58688-a438-4fa0-8ffd-dd70fe535772/amplify/backend/api/Boxie/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",

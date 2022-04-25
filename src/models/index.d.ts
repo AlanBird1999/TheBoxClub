@@ -16,15 +16,11 @@ type ResidenceMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 type PlaceMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserResidenceMetaData = {
+type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -54,41 +50,31 @@ export declare class Container {
 export declare class Residence {
   readonly id: string;
   readonly rName?: string | null;
-  readonly users?: (UserResidence | null)[] | null;
-  readonly Place?: Place | null;
+  readonly Places?: (Place | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly residencePlaceId?: string | null;
   constructor(init: ModelInit<Residence, ResidenceMetaData>);
   static copyOf(source: Residence, mutator: (draft: MutableModel<Residence, ResidenceMetaData>) => MutableModel<Residence, ResidenceMetaData> | void): Residence;
-}
-
-export declare class User {
-  readonly id: string;
-  readonly UserName?: string | null;
-  readonly Residences?: (UserResidence | null)[] | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<User, UserMetaData>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }
 
 export declare class Place {
   readonly id: string;
   readonly pName: string;
   readonly Containers?: (Container | null)[] | null;
+  readonly residenceID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Place, PlaceMetaData>);
   static copyOf(source: Place, mutator: (draft: MutableModel<Place, PlaceMetaData>) => MutableModel<Place, PlaceMetaData> | void): Place;
 }
 
-export declare class UserResidence {
+export declare class User {
   readonly id: string;
-  readonly residence: Residence;
-  readonly user: User;
+  readonly UserName?: string | null;
+  readonly Residences?: Residence | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<UserResidence, UserResidenceMetaData>);
-  static copyOf(source: UserResidence, mutator: (draft: MutableModel<UserResidence, UserResidenceMetaData>) => MutableModel<UserResidence, UserResidenceMetaData> | void): UserResidence;
+  readonly userResidencesId?: string | null;
+  constructor(init: ModelInit<User, UserMetaData>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }

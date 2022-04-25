@@ -9,6 +9,7 @@ export const getItem = /* GraphQL */ `
       Description
       iName
       Photo
+      containerID
       createdAt
       updatedAt
       _version
@@ -29,6 +30,7 @@ export const listItems = /* GraphQL */ `
         Description
         iName
         Photo
+        containerID
         createdAt
         updatedAt
         _version
@@ -58,6 +60,7 @@ export const syncItems = /* GraphQL */ `
         Description
         iName
         Photo
+        containerID
         createdAt
         updatedAt
         _version
@@ -75,6 +78,10 @@ export const getContainer = /* GraphQL */ `
       id
       Place
       placeID
+      Items {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -138,25 +145,15 @@ export const getResidence = /* GraphQL */ `
     getResidence(id: $id) {
       id
       rName
-      users {
+      Places {
         nextToken
         startedAt
-      }
-      Place {
-        id
-        pName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      residencePlaceId
     }
   }
 `;
@@ -175,7 +172,6 @@ export const listResidences = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        residencePlaceId
       }
       nextToken
       startedAt
@@ -203,7 +199,6 @@ export const syncResidences = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        residencePlaceId
       }
       nextToken
       startedAt
@@ -219,6 +214,7 @@ export const getPlace = /* GraphQL */ `
         nextToken
         startedAt
       }
+      residenceID
       createdAt
       updatedAt
       _version
@@ -237,6 +233,7 @@ export const listPlaces = /* GraphQL */ `
       items {
         id
         pName
+        residenceID
         createdAt
         updatedAt
         _version
@@ -264,6 +261,7 @@ export const syncPlaces = /* GraphQL */ `
       items {
         id
         pName
+        residenceID
         createdAt
         updatedAt
         _version
@@ -281,14 +279,20 @@ export const getUser = /* GraphQL */ `
       id
       UserName
       Residences {
-        nextToken
-        startedAt
+        id
+        rName
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      userResidencesId
     }
   }
 `;
@@ -307,6 +311,7 @@ export const listUsers = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        userResidencesId
       }
       nextToken
       startedAt
@@ -334,89 +339,7 @@ export const syncUsers = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getUserResidence = /* GraphQL */ `
-  query GetUserResidence($id: ID!) {
-    getUserResidence(id: $id) {
-      id
-      residenceID
-      userID
-      residence {
-        id
-        rName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        residencePlaceId
-      }
-      user {
-        id
-        UserName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listUserResidences = /* GraphQL */ `
-  query ListUserResidences(
-    $filter: ModelUserResidenceFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserResidences(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        residenceID
-        userID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUserResidences = /* GraphQL */ `
-  query SyncUserResidences(
-    $filter: ModelUserResidenceFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUserResidences(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        residenceID
-        userID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+        userResidencesId
       }
       nextToken
       startedAt

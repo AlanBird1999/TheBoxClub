@@ -12,6 +12,7 @@ export const createItem = /* GraphQL */ `
       Description
       iName
       Photo
+      containerID
       createdAt
       updatedAt
       _version
@@ -30,6 +31,7 @@ export const updateItem = /* GraphQL */ `
       Description
       iName
       Photo
+      containerID
       createdAt
       updatedAt
       _version
@@ -48,6 +50,7 @@ export const deleteItem = /* GraphQL */ `
       Description
       iName
       Photo
+      containerID
       createdAt
       updatedAt
       _version
@@ -65,6 +68,10 @@ export const createContainer = /* GraphQL */ `
       id
       Place
       placeID
+      Items {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -82,6 +89,10 @@ export const updateContainer = /* GraphQL */ `
       id
       Place
       placeID
+      Items {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -99,6 +110,10 @@ export const deleteContainer = /* GraphQL */ `
       id
       Place
       placeID
+      Items {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -115,25 +130,15 @@ export const createResidence = /* GraphQL */ `
     createResidence(input: $input, condition: $condition) {
       id
       rName
-      users {
+      Places {
         nextToken
         startedAt
-      }
-      Place {
-        id
-        pName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      residencePlaceId
     }
   }
 `;
@@ -145,25 +150,15 @@ export const updateResidence = /* GraphQL */ `
     updateResidence(input: $input, condition: $condition) {
       id
       rName
-      users {
+      Places {
         nextToken
         startedAt
-      }
-      Place {
-        id
-        pName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      residencePlaceId
     }
   }
 `;
@@ -175,25 +170,15 @@ export const deleteResidence = /* GraphQL */ `
     deleteResidence(input: $input, condition: $condition) {
       id
       rName
-      users {
+      Places {
         nextToken
         startedAt
-      }
-      Place {
-        id
-        pName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      residencePlaceId
     }
   }
 `;
@@ -209,6 +194,7 @@ export const createPlace = /* GraphQL */ `
         nextToken
         startedAt
       }
+      residenceID
       createdAt
       updatedAt
       _version
@@ -229,6 +215,7 @@ export const updatePlace = /* GraphQL */ `
         nextToken
         startedAt
       }
+      residenceID
       createdAt
       updatedAt
       _version
@@ -249,6 +236,7 @@ export const deletePlace = /* GraphQL */ `
         nextToken
         startedAt
       }
+      residenceID
       createdAt
       updatedAt
       _version
@@ -266,14 +254,20 @@ export const createUser = /* GraphQL */ `
       id
       UserName
       Residences {
-        nextToken
-        startedAt
+        id
+        rName
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      userResidencesId
     }
   }
 `;
@@ -286,14 +280,20 @@ export const updateUser = /* GraphQL */ `
       id
       UserName
       Residences {
-        nextToken
-        startedAt
+        id
+        rName
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      userResidencesId
     }
   }
 `;
@@ -306,27 +306,6 @@ export const deleteUser = /* GraphQL */ `
       id
       UserName
       Residences {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createUserResidence = /* GraphQL */ `
-  mutation CreateUserResidence(
-    $input: CreateUserResidenceInput!
-    $condition: ModelUserResidenceConditionInput
-  ) {
-    createUserResidence(input: $input, condition: $condition) {
-      id
-      residenceID
-      userID
-      residence {
         id
         rName
         createdAt
@@ -334,94 +313,13 @@ export const createUserResidence = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        residencePlaceId
-      }
-      user {
-        id
-        UserName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-    }
-  }
-`;
-export const updateUserResidence = /* GraphQL */ `
-  mutation UpdateUserResidence(
-    $input: UpdateUserResidenceInput!
-    $condition: ModelUserResidenceConditionInput
-  ) {
-    updateUserResidence(input: $input, condition: $condition) {
-      id
-      residenceID
-      userID
-      residence {
-        id
-        rName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        residencePlaceId
-      }
-      user {
-        id
-        UserName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteUserResidence = /* GraphQL */ `
-  mutation DeleteUserResidence(
-    $input: DeleteUserResidenceInput!
-    $condition: ModelUserResidenceConditionInput
-  ) {
-    deleteUserResidence(input: $input, condition: $condition) {
-      id
-      residenceID
-      userID
-      residence {
-        id
-        rName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        residencePlaceId
-      }
-      user {
-        id
-        UserName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+      userResidencesId
     }
   }
 `;

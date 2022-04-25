@@ -24,52 +24,61 @@ interface homeProps {
 }
 
 export default function HomeScreen(props: homeProps) {
-  const [data, setData] = useState(null);
-  Auth.currentUserInfo()
-    .then(async (userInfo) => {
-      console.log("user info in home screen", userInfo);
-      const dataUser: any = await API.graphql({
-        query: queries.getUser,
-        variables: { id: userInfo.id },
-      });
-      console.log(dataUser);
-      if (!dataUser.data.getUser) {
-        const residenceDetails = {
-          rName: userInfo.username,
-        };
-        const newResidence = await API.graphql({
-          query: mutations.createResidence,
-          variables: { input: residenceDetails },
+  const [residenceData, setResidenceData] = useState(null);
+  const [roomData, setRoomData] = useState(null);
+  if (residenceData == null)
+    Auth.currentUserInfo()
+      .then(async (userInfo) => {
+        // console.log("user info in home screen", userInfo);
+        const dataResidence: any = await API.graphql({
+          query: queries.getResidence,
+          variables: { id: userInfo.id },
         });
-        const userDeatails = {
-          id: userInfo.id,
-          UserName: userInfo.username,
-        };
+        console.log("data residence", dataResidence);
+        if (!dataResidence.data.getResidence) {
+          const residenceDetails = {
+            rName: userInfo.username,
+            id: userInfo.id,
+          };
+          const newResidence: any = await API.graphql({
+            query: mutations.createResidence,
+            variables: { input: residenceDetails },
+          });
 
-        const newUser = await API.graphql({
-          query: mutations.createUser,
-          variables: { input: userDeatails },
+          console.log("newUser", newResidence);
+          setResidenceData(newResidence);
+          //TODO: right around here if we want the ability to have multiple users to a single residence
+          //this is where we can prompt them to give a residence head
+        } else {
+          setResidenceData(dataResidence);
+        }
+        const data: any = dataResidence;
+        console.log("data: ", data.data.getResidence.id);
+        const filter = {
+          residenceID: new Map([["residenceID", data.data.getResidence.id]]), //(id: any) => id == data.data.getResidence.id,
+        };
+        const places: any = await API.graphql({
+          query: queries.getPlace,
+          variables: { id: "e8370134-0ff5-47c4-b60e-b1e77029c525" },
         });
-        console.log("newUser", newUser);
-        //TODO: right around here if we want the ability to have multiple users to a single residence
-        //this is where we can prompt them to give a residence head
-      }
-    })
-    .catch((error) => {
-      console.log("error", error);
-      Alert.alert("Error getting user details", error.message, [
-        {
-          text: "OK",
-          style: "cancel",
-        },
-      ]);
-    });
+        console.log("places:", places);
+        setRoomData(places);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        Alert.alert("Error getting user details", error.message, [
+          {
+            text: "OK",
+            style: "cancel",
+          },
+        ]);
+      });
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         numColumns={2}
-        data={data}
+        data={roomData}
         renderItem={({ item }) => (
           <Room
             name={item.name}
@@ -81,7 +90,7 @@ export default function HomeScreen(props: homeProps) {
       <View style={styles.buttonView}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => addItem(props.navigation, data)}
+          onPress={() => addItem(props.navigation, residenceData)}
         >
           <Text style={styles.icon}>+</Text>
         </TouchableOpacity>
@@ -91,6 +100,7 @@ export default function HomeScreen(props: homeProps) {
 }
 
 function addItem(navigation: any, data: any) {
+  console.log("home add item data:", data);
   navigation.navigate("AddItemNavigation", data);
 }
 

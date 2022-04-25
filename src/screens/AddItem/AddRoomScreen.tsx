@@ -1,22 +1,72 @@
 import { Picker } from "@react-native-picker/picker";
-import { View, StyleSheet, TextInput, Text } from "react-native";
+import { API } from "aws-amplify";
+import React from "react";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+import * as mutations from "../../graphql/mutations";
 
 interface addRoomProps {
   navigation: any;
+  route: any;
 }
 
 export default function AddItemRoom(props: addRoomProps) {
+  // console.log("add item room", props);
+  const [text, onChangeText] = React.useState("");
   return (
     <View style={styles.container}>
       <Text>Room Name</Text>
-      <TextInput style={styles.input} placeholder="Room Name" />
+      <TextInput
+        style={styles.input}
+        placeholder="Room Name"
+        onChangeText={onChangeText}
+        value={text}
+      />
       <Text>Room Icon</Text>
       <Picker style={styles.input} placeholder="none">
         <Picker.Item label="Box"></Picker.Item>
         <Picker.Item label="House"></Picker.Item>
       </Picker>
+      <TouchableOpacity
+        onPress={() =>
+          saveRoom(props.route.params.data.getResidence, text, props.navigation)
+        }
+        style={styles.button}
+      >
+        <Text>Save Room</Text>
+      </TouchableOpacity>
     </View>
   );
+}
+
+async function saveRoom(
+  residenceProps: any,
+  placeName: string,
+  navigation: any
+) {
+  // console.log("pressed save room, residence props", residenceProps);
+  const placeDetails = {
+    pName: placeName,
+    residenceID: residenceProps.id,
+  };
+  const newResidence: any = await API.graphql({
+    query: mutations.createPlace,
+    variables: { input: placeDetails },
+  });
+
+  Alert.alert("Successfully created room", "Room name: " + placeName, [
+    {
+      text: "OK",
+      style: "cancel",
+    },
+  ]);
+  navigation.navigate("Home");
 }
 
 const styles = StyleSheet.create({
@@ -29,6 +79,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomColor: "lightblue",
     borderBottomWidth: 2,
+    margin: 10,
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "lightblue",
+    padding: 10,
     margin: 10,
   },
 });
