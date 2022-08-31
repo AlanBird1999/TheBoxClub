@@ -29,6 +29,12 @@ Project:    Boxie
 or
 ```expo start```
 
+# Wiki and Logs
+
+http://serverless-boxie-website.s3-website-us-west-1.amazonaws.com/
+
+[Website Github](https://github.com/AlanBird1999/BoxClub-Team-Website)
+
 # Features
 
-TODO:
+Todo:
