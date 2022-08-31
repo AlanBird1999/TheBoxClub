@@ -5,10 +5,14 @@ Project:    Boxie
 ```
 # Installation
 
+| Requirement |
+| ----------- |
+| [Node.js](https://nodejs.org/) |
+| [VS Code](https://code.visualstudio.com/download)
+
 1. ` git clone https://github.com/AlanBird1999/TheBoxClub `
-2. requires [Node.js](https://nodejs.org/)
-3. ` npm install `
-4. ` amplify configure `
+2. ` npm install `
+3. ` amplify configure `
     ```
     Please choose the profile you want to use: anything works
     Which app are you working on?: Boxie
@@ -22,16 +26,17 @@ Project:    Boxie
     Start Command: npm.cmd run-script start
     Do you plan on modifying this backend? Y
     ```
-5. ```amplify pull ```
+4. `amplify pull `
 
 # Running Application
-``` npm start ```
+
+` npm start `
 or
-```expo start```
+`expo start`
 
 ## running on physical device
 
-* Download Expo Client on your phone and scan the qr code.
+* Download Expo Go on your phone and scan the qr code.
 
 ## running on emulator
 
