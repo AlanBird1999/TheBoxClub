@@ -10,6 +10,8 @@ Project:    Boxie
 | [Node.js](https://nodejs.org/) |
 | [VS Code](https://code.visualstudio.com/download)
 
+### Steps
+
 1. ` git clone https://github.com/AlanBird1999/TheBoxClub `
 2. ` npm install `
 3. ` amplify configure `
