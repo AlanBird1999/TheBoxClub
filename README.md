@@ -29,12 +29,33 @@ Project:    Boxie
 or
 ```expo start```
 
+## running on physical device
+
+* Download Expo Client on your phone and scan the qr code.
+
+## running on emulator
+
+Download one of the following softwars to run an emulator on your computer to run the application.
+
+* Download [Xcode for ios](https://developer.apple.com/xcode/resources/)
+* Download [Android emulator](https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjP5qeLkfL5AhWKIa0GHTGuCHgYABAAGgJwdg&ohost=www.google.com&cid=CAASJeRoPY5mURzsDyceQobikgNe0oz2mq993XlOmzR3hKoPxaWtlUM&sig=AOD64_342kHEBWanxPi4URDpyYsOJYgqkg&q&adurl&ved=2ahUKEwjMz6GLkfL5AhX1IX0KHb_sDeIQ0Qx6BAgDEAE)
+
 # Wiki and Logs
 
 [Website](http://serverless-boxie-website.s3-website-us-west-1.amazonaws.com/)
 
 [Github](https://github.com/AlanBird1999/BoxClub-Team-Website)
 
-# Features
+# Current Features
 
-Todo:
+* Scan QR codes
+* Secure login
+
+# Features Comming
+
+amongst the list below there will be many more features added over time.
+
+* Store information in a Database
+* Create QR Codes for boxes
+* Family and Friends access (Share boxes amongst users)
+* Insurance claim pdf generation
