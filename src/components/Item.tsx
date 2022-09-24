@@ -10,6 +10,8 @@ import AWSConfig from "../aws-exports";
 Amplify.configure(AWSConfig);
 
 interface itemProps {
+  room: string,
+  container: string,
   navigation: any;
   item: { name: string; description: string; image?: ImageURISource };
 }

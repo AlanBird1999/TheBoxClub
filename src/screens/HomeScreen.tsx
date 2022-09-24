@@ -20,8 +20,9 @@ interface homeProps {
 export default function HomeScreen(props: homeProps) {
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>BOXIE</Text>
       <FlatList
-        numColumns={2}
+        numColumns={1}
         data={data}
         renderItem={({ item }) => (
           <Room
@@ -53,6 +54,12 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     flex: 1,
     alignItems: 'center',
+    backgroundColor: '#547C7D',
+  },
+  title: {
+    fontSize: 35,
+    color: 'lightblue',
+    padding: 25,
   },
   input: {
     height: 50,
@@ -84,19 +91,27 @@ const data = [
     name: "Basement",
     containers: [
       {
-        name: "Box 1",
+        name: "Winter clothes",
         key: 1,
         items: [
-          { name: "item 1", description: "item 1 description", key: 1 },
-          { name: "item 2", description: "item 2 description", key: 2 },
+          { name: "Eric's Coat", description: "item 1 description", key: 1 },
+          { name: "Gloves", description: "item 2 description", key: 2 },
         ],
       },
       {
-        name: "Box 2",
+        name: "Yard games",
         key: 2,
         items: [
-          { name: "item 1", description: "item 1 description", key: 1 },
-          { name: "item 2", description: "item 2 description", key: 2 },
+          { name: "spikeball", description: "item 1 description", key: 1 },
+          { name: "bocce ball", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Board games",
+        key: 3,
+        items: [
+          { name: "Five Tribes", description: "item 1 description", key: 1 },
+          { name: "Azul", description: "item 2 description", key: 2 },
         ],
       },
     ],
@@ -152,7 +167,7 @@ const data = [
         ],
       },
       {
-        name: "Haloween",
+        name: "Haloween decor",
         key: 2,
         items: [
           { name: "item 1", description: "item 1 description", key: 1 },
@@ -176,6 +191,14 @@ const data = [
       {
         name: "Car parts",
         key: 2,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Bicycles",
+        key: 3,
         items: [
           { name: "item 1", description: "item 1 description", key: 1 },
           { name: "item 2", description: "item 2 description", key: 2 },
@@ -208,7 +231,40 @@ const data = [
   },
   {
     name: "The Crypt",
-    containers: [],
+    containers: [
+      {
+        name: "Ancestor 1",
+        key: 1,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Ancestor 2",
+        key: 2,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Ancestor 3",
+        key: 3,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+      {
+        name: "Ancestor 4",
+        key: 4,
+        items: [
+          { name: "item 1", description: "item 1 description", key: 1 },
+          { name: "item 2", description: "item 2 description", key: 2 },
+        ],
+      },
+    ],
     key: 6,
   },
   {
@@ -230,8 +286,15 @@ const data = [
   {
     name: "Shed",
     containers: [
-      { name: "Orange", key: 1, items: [] },
-      { name: "Apples", key: 2, items: [] },
+      {
+        name: "Gardening tools",
+        key: 1,
+        items: [
+          { name: "trowels and buckets", description: "item 1 description", key: 1 },
+          { name: "shovels and chainsaws", description: "item 2 description", key: 2 },
+        ],
+      },
+      { name: "Unholy number of critters", key: 2, items: [] },
     ],
     key: 9,
   },

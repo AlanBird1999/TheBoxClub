@@ -146,13 +146,13 @@ export default function LoginScreen(props: loginProps) {
           onPress={() => props.navigation.navigate("SignIn")}
           style={styles.button}
         >
-          <Text>Login</Text>
+          <Text style={styles.text}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => props.navigation.navigate("SignUp")}
           style={styles.button}
         >
-          <Text>Sign Up</Text>
+          <Text style={styles.text}>Sign Up</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </KeyboardAvoidingView>
@@ -161,8 +161,16 @@ export default function LoginScreen(props: loginProps) {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 20,
+    paddingBottom: 0,
     flex: 1,
-    justifyContent: "center",
+    alignItems: 'center',
+    backgroundColor: '#547C7D',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'lightblue',
+    fontSize: 25,
   },
   input: {
     height: 50,
@@ -172,12 +180,14 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "lightblue",
+    backgroundColor: "black",
     padding: 10,
     margin: 10,
+    width: 400,
   },
   title: {
     fontSize: 45,
+    color: 'lightblue',
     alignSelf: "center",
     paddingBottom: 10,
   },

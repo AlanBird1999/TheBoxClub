@@ -148,7 +148,7 @@ export default function LoginScreen(props: loginProps) {
                 onChangeText={(value) => changeText("password", value)}
               />
               <TouchableOpacity onPress={signUp} style={styles.button}>
-                <Text>Sign Up</Text>
+                <Text style={styles.text}>Sign Up</Text>
               </TouchableOpacity>
 
               <View>
@@ -162,7 +162,7 @@ export default function LoginScreen(props: loginProps) {
                   onPress={() => confirmSignUp(props.navigation)}
                   style={styles.button}
                 >
-                  <Text>Confirm Sign Up</Text>
+                  <Text style={styles.text}>Confirm Sign Up</Text>
                 </TouchableOpacity>
               </View>
             </ScrollView>
@@ -177,6 +177,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    backgroundColor: '#547C7D',
+  },
+  text: {
+    color: 'lightblue',
+    fontSize: 25,
   },
   scrollv: {
     flexGrow: 1,
@@ -187,15 +192,18 @@ const styles = StyleSheet.create({
     borderBottomColor: "lightblue",
     borderBottomWidth: 2,
     margin: 10,
+    fontSize: 20,
   },
   button: {
     alignItems: "center",
-    backgroundColor: "lightblue",
+    backgroundColor: "black",
     padding: 10,
     margin: 10,
+    width: 400,
   },
   title: {
     fontSize: 45,
     alignSelf: "center",
+    color: 'lightblue',
   },
 });
