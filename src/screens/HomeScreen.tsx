@@ -29,7 +29,7 @@ export default function HomeScreen(props: homeProps) {
   if (residenceData == null)
     Auth.currentUserInfo()
       .then(async (userInfo) => {
-        // console.log("user info in home screen", userInfo);
+        console.log("user info in home screen", userInfo);
         const dataResidence: any = await API.graphql({
           query: queries.getResidence,
           variables: { id: userInfo.id },
@@ -52,16 +52,15 @@ export default function HomeScreen(props: homeProps) {
         } else {
           setResidenceData(dataResidence);
         }
-        const data: any = dataResidence;
-        console.log("data: ", data.data.getResidence.id);
+        const data: any = dataResidence.data;
         const filter = {
-          residenceID: new Map([["residenceID", data.data.getResidence.id]]), //(id: any) => id == data.data.getResidence.id,
+          residenceID: new Map([["residenceID", data.getResidence.id]]), //(id: any) => id == data.data.getResidence.id,
         };
         const places: any = await API.graphql({
-          query: queries.getPlace,
-          variables: { id: "e8370134-0ff5-47c4-b60e-b1e77029c525" },
+          query: queries.listPlaces,
+          variables: filter,
         });
-        console.log("places:", places);
+        console.log("places", places);
         setRoomData(places);
       })
       .catch((error) => {

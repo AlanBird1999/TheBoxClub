@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Item": {
-            "name": "Item",
+        "User": {
+            "name": "User",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,121 +10,25 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Description": {
-                    "name": "Description",
+                "userName": {
+                    "name": "userName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "iName": {
-                    "name": "iName",
+                "Residence": {
+                    "name": "Residence",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Photo": {
-                    "name": "Photo",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "containerID": {
-                    "name": "containerID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Items",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byContainer",
-                        "fields": [
-                            "containerID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Container": {
-            "name": "Container",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Place": {
-                    "name": "Place",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "placeID": {
-                    "name": "placeID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Items": {
-                    "name": "Items",
-                    "isArray": true,
                     "type": {
-                        "model": "Item"
+                        "model": "Residence"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "containerID"
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "userResidenceId"
                     }
                 },
                 "createdAt": {
@@ -142,23 +46,21 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "userResidenceId": {
+                    "name": "userResidenceId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Containers",
+            "pluralName": "Users",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byPlace",
-                        "fields": [
-                            "placeID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -265,7 +167,7 @@ export const schema = {
                     "name": "pName",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Containers": {
@@ -340,8 +242,8 @@ export const schema = {
                 }
             ]
         },
-        "User": {
-            "name": "User",
+        "Container": {
+            "name": "Container",
             "fields": {
                 "id": {
                     "name": "id",
@@ -350,26 +252,33 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "UserName": {
-                    "name": "UserName",
+                "cName": {
+                    "name": "cName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "Residences": {
-                    "name": "Residences",
-                    "isArray": false,
+                "Items": {
+                    "name": "Items",
+                    "isArray": true,
                     "type": {
-                        "model": "Residence"
+                        "model": "Item"
                     },
                     "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "userResidencesId"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "containerID"
                     }
+                },
+                "placeID": {
+                    "name": "placeID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -386,21 +295,112 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "userResidencesId": {
-                    "name": "userResidencesId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Users",
+            "pluralName": "Containers",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPlace",
+                        "fields": [
+                            "placeID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Item": {
+            "name": "Item",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "iName": {
+                    "name": "iName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "photo": {
+                    "name": "photo",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "containerID": {
+                    "name": "containerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Items",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byContainer",
+                        "fields": [
+                            "containerID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -423,5 +423,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "fd8786949d2df516834c56af0454a457"
+    "version": "c843d1af930462970ffd4f9402bcb631"
 };

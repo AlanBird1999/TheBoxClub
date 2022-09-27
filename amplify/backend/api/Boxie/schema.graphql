@@ -1,34 +1,33 @@
-type Item @model @auth(rules: [{ allow: public }]) {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
-  Description: String
-  iName: String!
-  Photo: String
-  containerID: ID! @index(name: "byContainer")
+  userName: String
+  Residence: Residence @hasOne
 }
 
-type Container @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  Place: String
-  placeID: ID! @index(name: "byPlace")
-  Items: [Item] @hasMany(indexName: "byContainer", fields: ["id"])
-}
-
-type Residence @model @auth(rules: [{ allow: public }]) {
+type Residence @model @auth(rules: [{allow: public}]) {
   id: ID!
   rName: String
   Places: [Place] @hasMany(indexName: "byResidence", fields: ["id"])
 }
 
-type Place @model @auth(rules: [{ allow: public }]) {
+type Place @model @auth(rules: [{allow: public}]) {
   id: ID!
-  pName: String!
+  pName: String
   Containers: [Container] @hasMany(indexName: "byPlace", fields: ["id"])
   residenceID: ID! @index(name: "byResidence")
 }
 
-type User @model @auth(rules: [{ allow: public }]) {
+type Container @model @auth(rules: [{allow: public}]) {
   id: ID!
-  UserName: String
-  Residences: Residence @hasOne
+  cName: String
+  Items: [Item] @hasMany(indexName: "byContainer", fields: ["id"])
+  placeID: ID! @index(name: "byPlace")
 }
- 
+
+type Item @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  description: String
+  iName: String
+  photo: String
+  containerID: ID! @index(name: "byContainer")
+}

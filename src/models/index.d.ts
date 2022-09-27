@@ -1,10 +1,6 @@
 import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 
-type ItemMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type ContainerMetaData = {
+type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -16,31 +12,23 @@ type PlaceMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserMetaData = {
+type ContainerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Item {
-  readonly id: string;
-  readonly Description?: string | null;
-  readonly iName: string;
-  readonly Photo?: string | null;
-  readonly containerID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Item, ItemMetaData>);
-  static copyOf(source: Item, mutator: (draft: MutableModel<Item, ItemMetaData>) => MutableModel<Item, ItemMetaData> | void): Item;
+type ItemMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Container {
+export declare class User {
   readonly id: string;
-  readonly Place?: string | null;
-  readonly placeID: string;
-  readonly Items?: (Item | null)[] | null;
+  readonly userName?: string | null;
+  readonly Residence?: Residence | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Container, ContainerMetaData>);
-  static copyOf(source: Container, mutator: (draft: MutableModel<Container, ContainerMetaData>) => MutableModel<Container, ContainerMetaData> | void): Container;
+  readonly userResidenceId?: string | null;
+  constructor(init: ModelInit<User, UserMetaData>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }
 
 export declare class Residence {
@@ -55,7 +43,7 @@ export declare class Residence {
 
 export declare class Place {
   readonly id: string;
-  readonly pName: string;
+  readonly pName?: string | null;
   readonly Containers?: (Container | null)[] | null;
   readonly residenceID: string;
   readonly createdAt?: string | null;
@@ -64,13 +52,25 @@ export declare class Place {
   static copyOf(source: Place, mutator: (draft: MutableModel<Place, PlaceMetaData>) => MutableModel<Place, PlaceMetaData> | void): Place;
 }
 
-export declare class User {
+export declare class Container {
   readonly id: string;
-  readonly UserName?: string | null;
-  readonly Residences?: Residence | null;
+  readonly cName?: string | null;
+  readonly Items?: (Item | null)[] | null;
+  readonly placeID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly userResidencesId?: string | null;
-  constructor(init: ModelInit<User, UserMetaData>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
+  constructor(init: ModelInit<Container, ContainerMetaData>);
+  static copyOf(source: Container, mutator: (draft: MutableModel<Container, ContainerMetaData>) => MutableModel<Container, ContainerMetaData> | void): Container;
+}
+
+export declare class Item {
+  readonly id: string;
+  readonly description?: string | null;
+  readonly iName?: string | null;
+  readonly photo?: string | null;
+  readonly containerID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Item, ItemMetaData>);
+  static copyOf(source: Item, mutator: (draft: MutableModel<Item, ItemMetaData>) => MutableModel<Item, ItemMetaData> | void): Item;
 }

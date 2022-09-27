@@ -3,10 +3,10 @@
   "serviceConfiguration": {
     "apiName": "Boxie",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-a8d58688-a438-4fa0-8ffd-dd70fe535772/amplify/backend/api/Boxie/schema.graphql",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authBoxie"
+      "mode": "API_KEY",
+      "keyDescription": "api key description",
+      "expirationTime": 30
     },
     "additionalAuthTypes": [
       {
