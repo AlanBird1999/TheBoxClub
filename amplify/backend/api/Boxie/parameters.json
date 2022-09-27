@@ -1,5 +1,8 @@
 {
   "AppSyncApiName": "Boxie",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-09-16T14:22:27.496Z",
+  "CreateAPIKey": 0,
+  "APIKeyExpirationEpoch": "-1"
 }

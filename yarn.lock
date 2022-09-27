@@ -14,8 +14,8 @@
   "resolved" "https://registry.npmjs.org/@aws-amplify/analytics/-/analytics-5.2.3.tgz"
   "version" "5.2.3"
   dependencies:
-    "@aws-amplify/cache" "4.0.38"
-    "@aws-amplify/core" "4.5.0"
+    "@aws-amplify/cache" "4.0.56"
+    "@aws-amplify/core" "4.7.5"
     "@aws-sdk/client-firehose" "3.6.1"
     "@aws-sdk/client-kinesis" "3.6.1"
     "@aws-sdk/client-personalize-events" "3.6.1"
@@ -116,7 +116,7 @@
   "resolved" "https://registry.npmjs.org/@aws-amplify/interactions/-/interactions-4.0.36.tgz"
   "version" "4.0.36"
   dependencies:
-    "@aws-amplify/core" "4.5.0"
+    "@aws-amplify/core" "4.7.5"
     "@aws-sdk/client-lex-runtime-service" "3.6.1"
 
 "@aws-amplify/predictions@4.0.36":
@@ -213,7 +213,7 @@
   "resolved" "https://registry.npmjs.org/@aws-amplify/xr/-/xr-3.0.36.tgz"
   "version" "3.0.36"
   dependencies:
-    "@aws-amplify/core" "4.5.0"
+    "@aws-amplify/core" "4.7.5"
 
 "@aws-crypto/crc32@^1.0.0":
   "integrity" "sha512-8K0b1672qbv05chSoKpwGZ3fhvVp28Fg3AVHVkEHFl2lTLChO7wD/hTyyo8ING7uc31uZRt7bNra/hA74Td7Tw=="
@@ -329,7 +329,7 @@
   "resolved" "https://registry.npmjs.org/@aws-crypto/util/-/util-2.0.1.tgz"
   "version" "2.0.1"
   dependencies:
-    "@aws-sdk/types" "^3.1.0"
+    "@aws-sdk/types" "^3.110.0"
     "@aws-sdk/util-utf8-browser" "^3.0.0"
     "tslib" "^1.11.1"
 
@@ -4139,7 +4139,7 @@
     "@aws-amplify/pubsub" "4.3.0"
     "@aws-amplify/storage" "4.4.19"
     "@aws-amplify/ui" "2.0.5"
-    "@aws-amplify/xr" "3.0.36"
+    "@aws-amplify/xr" "3.0.54"
 
 "axios@0.21.4":
   "integrity" "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg=="

@@ -1,4 +1,4 @@
-type Item @model @auth(rules: [{allow: public}]) {
+type Item @model @auth(rules: [{ allow: public }]) {
   id: ID!
   Description: String
   iName: String!
@@ -6,27 +6,27 @@ type Item @model @auth(rules: [{allow: public}]) {
   containerID: ID! @index(name: "byContainer")
 }
 
-type Container @model @auth(rules: [{allow: public}]) {
+type Container @model @auth(rules: [{ allow: public }]) {
   id: ID!
   Place: String
   placeID: ID! @index(name: "byPlace")
   Items: [Item] @hasMany(indexName: "byContainer", fields: ["id"])
 }
 
-type Residence @model @auth(rules: [{allow: public}]) {
+type Residence @model @auth(rules: [{ allow: public }]) {
   id: ID!
   rName: String
   Places: [Place] @hasMany(indexName: "byResidence", fields: ["id"])
 }
 
-type Place @model @auth(rules: [{allow: public}]) {
+type Place @model @auth(rules: [{ allow: public }]) {
   id: ID!
   pName: String!
   Containers: [Container] @hasMany(indexName: "byPlace", fields: ["id"])
   residenceID: ID! @index(name: "byResidence")
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{ allow: public }]) {
   id: ID!
   UserName: String
   Residences: Residence @hasOne
