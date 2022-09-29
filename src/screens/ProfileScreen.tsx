@@ -1,6 +1,6 @@
 import { Auth } from "aws-amplify";
 import React, { useState } from "react";
-import { View, StyleSheet, Image, Text, Alert } from "react-native";
+import { SafeAreaView, StyleSheet, Image, Text, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 interface profileProps {
   navigation: any;
@@ -23,21 +23,21 @@ export default function ProfileScreen(props: profileProps) {
       ]);
     });
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image
         style={styles.image}
         source={require("../../assets/default-box.png")}
       ></Image>
-      <Text>Name: {userEmail || "Loading ..."}</Text>
-      <TouchableOpacity style={styles.logoutButton}>
+      <Text style={styles.text}>Username: {userEmail || "Loading ..."}</Text>
+      <TouchableOpacity style={styles.button}>
         <Text
-          style={styles.logoutText}
+          style={styles.text}
           onPress={() => logout(props.navigation)}
         >
-          Log out
+          Log Out
         </Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -66,20 +66,30 @@ function logout(navigation: any) {
 }
 
 const styles = StyleSheet.create({
-  logoutButton: {
-    backgroundColor: "#A1CAF1",
-    borderRadius: 20,
-    padding: 10,
-    width: 75,
-  },
   logoutText: {
     color: "#FFFFFF",
   },
   container: {
     padding: 20,
+    paddingBottom: 0,
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#547C7D',
+    justifyContent: 'center',
   },
   image: {
     height: 100,
     width: 100,
   },
+  button: {
+    alignItems: "center",
+    backgroundColor: "black",
+    padding: 10,
+    margin: 10,
+    width: 400,
+  },
+  text: {
+    color: 'lightblue',
+    fontSize: 25
+  }
 });

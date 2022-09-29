@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { ScrollView, Text, StyleSheet, TouchableOpacity, SafeAreaView, FlatList } from "react-native";
 import Amplify from "aws-amplify";
 import AWSConfig from "../aws-exports";
+import Container from "./Container";
 
 Amplify.configure(AWSConfig);
 
@@ -12,12 +13,22 @@ interface nameProps {
 
 export default function Room(props: nameProps) {
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() => openContainers(props.containers, props.nav)}
-    >
+    <SafeAreaView>
       <Text style={styles.roomName}>{props.name}</Text>
-    </TouchableOpacity>
+      <FlatList 
+        data={props.containers} 
+        style={styles.contentContainer}
+        horizontal={true}
+        renderItem={({ item }) => (
+          <Container
+            name={item.name}
+            room={props.name}
+            navigation={props.nav}
+            items={item.items}
+          ></Container>
+        )}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -35,8 +46,12 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     margin: 10,
   },
+  contentContainer: {
+    height: 200,
+    width: 400,
+  },
   roomName: {
     fontSize: 20,
-    color: "white",
+    color: "lightblue",
   },
 });

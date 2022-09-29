@@ -11,8 +11,9 @@ Amplify.configure(AWSConfig);
 
 interface containerProps {
   name: string;
+  room: string,
   navigation: any;
-  items: { name: string; description: string; image?: ImageURISource }[];
+  items: { name: string; description: string; container: string; room: string; image?: ImageURISource }[];
 }
 
 export default function Container(props: containerProps) {
