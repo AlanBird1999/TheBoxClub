@@ -18,24 +18,28 @@ export default function AddItemScreen(props: addItemProps) {
   const [selectedContainer, setSelectedConatainer] = useState(0);
 
   const renderRoomList = () => {
-    return Object.keys(props.route.params).map((key: string, index: number) => {
-      return (
-        <Picker.Item
-          label={props.route.params[index].name}
-          value={props.route.params[index]}
-          key={index}
-        ></Picker.Item>
-      );
-    });
-  };
-
-  const renderContainerList = () => {
-    return Object.keys(props.route.params[selectedRoom].containers).map(
+    return Object.keys(props.route.params.Places).map(
       (key: string, index: number) => {
         return (
           <Picker.Item
-            label={props.route.params[selectedRoom].containers[index].name}
-            value={props.route.params[selectedRoom].containers[index]}
+            label={props.route.params.Places[index].pName}
+            value={props.route.params.Places[index]}
+            key={index}
+          ></Picker.Item>
+        );
+      }
+    );
+  };
+
+  const renderContainerList = () => {
+    return Object.keys(props.route.params.Places[selectedRoom].containers).map(
+      (key: string, index: number) => {
+        return (
+          <Picker.Item
+            label={
+              props.route.params.Places[selectedRoom].containers[index].cName
+            }
+            value={props.route.params.Places[selectedRoom].containers[index]}
             key={index}
           ></Picker.Item>
         );
@@ -56,7 +60,7 @@ export default function AddItemScreen(props: addItemProps) {
       />
       <Text style={styles.text}>Room</Text>
       <Picker
-        selectedValue={props.route.params[selectedRoom]}
+        selectedValue={props.route.params.Places[selectedRoom]}
         style={styles.input}
         onValueChange={(itemValue, itemIndex) => {
           setSelectedRoom(itemIndex);
@@ -67,7 +71,7 @@ export default function AddItemScreen(props: addItemProps) {
       <Text style={styles.text}>Container</Text>
       <Picker
         selectedValue={
-          props.route.params[selectedRoom].containers[selectedContainer]
+          props.route.params.Places[selectedRoom].containers[selectedContainer]
         }
         style={styles.input}
         onValueChange={(itemValue, itemIndex) => {

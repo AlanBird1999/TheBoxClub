@@ -1,11 +1,16 @@
-import { StyleSheet, SafeAreaView, FlatList, ImageURISource } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  ImageURISource,
+} from "react-native";
 import Container from "../components/Container";
 
 interface containerProps {
   route: {
     params: {
       containers: {
-        name: string;
+        cName: string;
         key: number;
         items: { name: string; description: string; image?: ImageURISource }[];
       }[];
@@ -15,6 +20,7 @@ interface containerProps {
 }
 
 export default function ContainerScreen(props: containerProps) {
+  console.log("props", props.route.params.containers);
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -22,7 +28,7 @@ export default function ContainerScreen(props: containerProps) {
         data={props.route.params.containers}
         renderItem={({ item }) => (
           <Container
-            name={item.name}
+            name={item.cName}
             navigation={props.navigation}
             items={item.items}
           ></Container>
@@ -37,7 +43,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   input: {
     height: 50,

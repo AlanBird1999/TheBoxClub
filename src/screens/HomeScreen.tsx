@@ -15,7 +15,7 @@ import * as queries from "../graphql/queries";
 import * as mutations from "../graphql/mutations";
 import * as subscriptions from "../graphql/subscriptions";
 import { useState } from "react";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 
 Amplify.configure(AWSConfig);
 
@@ -24,17 +24,17 @@ interface homeProps {
 }
 
 export default function HomeScreen(props: homeProps) {
+  //TODO need some way to trigger reload based off props flag
+
   const [residenceData, setResidenceData] = useState(null);
   const [roomData, setRoomData] = useState(null);
   if (residenceData == null)
     Auth.currentUserInfo()
       .then(async (userInfo) => {
-        console.log("user info in home screen", userInfo);
-        const dataResidence: any = await API.graphql({
-          query: queries.getResidence,
-          variables: { id: userInfo.id },
-        });
-        console.log("data residence", dataResidence);
+        const dataResidence: any = await API.graphql(
+          graphqlOperation(queries.getResidence, { id: userInfo.id })
+        );
+        let placesFirst = dataResidence.data.getResidence.Places;
         if (!dataResidence.data.getResidence) {
           const residenceDetails = {
             rName: userInfo.username,
@@ -45,7 +45,6 @@ export default function HomeScreen(props: homeProps) {
             variables: { input: residenceDetails },
           });
 
-          console.log("newUser", newResidence);
           setResidenceData(newResidence);
           //TODO: right around here if we want the ability to have multiple users to a single residence
           //this is where we can prompt them to give a residence head
@@ -53,15 +52,15 @@ export default function HomeScreen(props: homeProps) {
           setResidenceData(dataResidence);
         }
         const data: any = dataResidence.data;
-        const filter = {
-          residenceID: new Map([["residenceID", data.getResidence.id]]), //(id: any) => id == data.data.getResidence.id,
+
+        const allObjects = await getAllObjects(data.getResidence.id);
+        setRoomData(allObjects);
+        const populatedDataResidence: any = {
+          Places: allObjects,
+          id: data.getResidence.id,
+          rName: data.getResidence.rName,
         };
-        const places: any = await API.graphql({
-          query: queries.listPlaces,
-          variables: filter,
-        });
-        console.log("places", places);
-        setRoomData(places);
+        setResidenceData(populatedDataResidence);
       })
       .catch((error) => {
         console.log("error", error);
@@ -80,7 +79,7 @@ export default function HomeScreen(props: homeProps) {
         data={roomData}
         renderItem={({ item }) => (
           <Room
-            name={item.name}
+            name={item.pName}
             nav={props.navigation}
             containers={item.containers}
           ></Room>
@@ -99,8 +98,53 @@ export default function HomeScreen(props: homeProps) {
 }
 
 function addItem(navigation: any, data: any) {
-  console.log("home add item data:", data);
   navigation.navigate("AddItemNavigation", data);
+}
+
+async function getAllObjects(residenceId: number): Promise<any> {
+  const ojbectArray = [];
+  const filter = {
+    residenceID: new Map([["residenceID", residenceId]]),
+  };
+  const places: any = await API.graphql({
+    query: queries.listPlaces,
+    variables: filter,
+  });
+  console.log("places", places);
+  // Foreach place, get all containers
+  for (const place of places.data.listPlaces.items) {
+    const containers: any = await API.graphql({
+      query: `query ListContainers(
+        $limit: Int
+        $nextToken: String
+      ) {
+        listContainers(filter: { placeID: { eq: "${place.id}" } }, limit: $limit, nextToken: $nextToken) {
+          items {
+            id
+            cName
+            placeID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`,
+    });
+
+    //TODO we are going to need to also populate each container with it's items
+    ojbectArray.push({
+      pName: place.pName,
+      id: place.id,
+      containers: containers.data.listContainers.items.map((c: any) => {
+        return { id: c.id, cName: c.cName };
+      }),
+    });
+  }
+  return ojbectArray;
 }
 
 const styles = StyleSheet.create({

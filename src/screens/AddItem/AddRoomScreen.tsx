@@ -28,11 +28,12 @@ export default function AddItemRoom(props: addRoomProps) {
         onChangeText={onChangeText}
         value={text}
       />
-      <Text>Room Icon</Text>
+      {/* <Text>Room Icon</Text>
       <Picker style={styles.input} placeholder="none">
         <Picker.Item label="Box"></Picker.Item>
         <Picker.Item label="House"></Picker.Item>
-      </Picker>
+      </Picker> 
+      TODO: Room Icon functionality yet to come*/}
       <TouchableOpacity
         onPress={() =>
           saveRoom(props.route.params.data.getResidence, text, props.navigation)
