@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   StyleSheet,
   Text,
@@ -93,8 +94,9 @@ export default function HomeScreen(props: homeProps) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>BOXIE</Text>
       <FlatList
-        numColumns={2}
+        numColumns={1}
         data={roomData}
         renderItem={({ item }) => (
           <Room
@@ -221,7 +223,13 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
+    backgroundColor: '#547C7D',
+  },
+  title: {
+    fontSize: 35,
+    color: 'lightblue',
+    padding: 25,
   },
   input: {
     height: 50,

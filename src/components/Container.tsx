@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Text,
   StyleSheet,
@@ -45,3 +46,53 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+=======
+import {
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageURISource,
+} from "react-native";
+import Amplify from "aws-amplify";
+import AWSConfig from "../aws-exports";
+
+Amplify.configure(AWSConfig);
+
+interface containerProps {
+  name: string;
+  room: string,
+  navigation: any;
+  items: { name: string; description: string; container: string; room: string; image?: ImageURISource }[];
+}
+
+export default function Container(props: containerProps) {
+  return (
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => openItems(props.items, props.navigation)}
+    >
+      <Text style={styles.roomName}>{props.name}</Text>
+    </TouchableOpacity>
+  );
+}
+
+function openItems(items: any, navigation: any) {
+  navigation.navigate("ItemScreen", { items });
+}
+
+const styles = StyleSheet.create({
+  container: {
+    width: 150,
+    height: 150,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    margin: 10,
+  },
+  roomName: {
+    fontSize: 20,
+    color: "white",
+  },
+});
+>>>>>>> 7b2323de3888acef9442f4e31e33b4b788a2df68
