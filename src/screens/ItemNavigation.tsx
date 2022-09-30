@@ -12,7 +12,7 @@ export default function ItemNavigation() {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: true }}
     >
       <Stack.Screen name="Rooms" component={HomeScreen} />
       <Stack.Screen name="ContainerScreen" component={Container_Screen} />

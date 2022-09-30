@@ -13,7 +13,6 @@ import AWSConfig from "../aws-exports";
 import Room from "../components/Room";
 import * as queries from "../graphql/queries";
 import * as mutations from "../graphql/mutations";
-import * as subscriptions from "../graphql/subscriptions";
 import { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 
@@ -31,34 +30,54 @@ export default function HomeScreen(props: homeProps) {
   if (residenceData == null)
     Auth.currentUserInfo()
       .then(async (userInfo) => {
-        const dataResidence: any = await API.graphql(
-          graphqlOperation(queries.getResidence, { id: userInfo.id })
-        );
-        let placesFirst = dataResidence.data.getResidence.Places;
-        if (!dataResidence.data.getResidence) {
+        const dataResidence: any = await API.graphql({
+          query: `
+          query ListResidences(
+            $limit: Int
+            $nextToken: String
+          ) {
+            listResidences(filter: { rName: { eq: "${userInfo.username}" }}, limit: $limit, nextToken: $nextToken) {
+              items {
+                id
+                rName
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+          }`,
+        });
+        dataResidence.data.listResidences.items =
+          dataResidence.data.listResidences.items.filter(
+            (r: any) => !r._deleted
+          );
+        if (!dataResidence.data.listResidences.items[0]) {
           const residenceDetails = {
             rName: userInfo.username,
-            id: userInfo.id,
           };
           const newResidence: any = await API.graphql({
             query: mutations.createResidence,
             variables: { input: residenceDetails },
           });
 
-          setResidenceData(newResidence);
+          setResidenceData(newResidence.createResidence);
           //TODO: right around here if we want the ability to have multiple users to a single residence
           //this is where we can prompt them to give a residence head
         } else {
           setResidenceData(dataResidence);
         }
-        const data: any = dataResidence.data;
+        const residence: any = dataResidence.data.listResidences.items[0];
 
-        const allObjects = await getAllObjects(data.getResidence.id);
+        const allObjects = await getAllObjects(residence.id);
         setRoomData(allObjects);
         const populatedDataResidence: any = {
           Places: allObjects,
-          id: data.getResidence.id,
-          rName: data.getResidence.rName,
+          id: residence.id,
+          rName: residence.rName,
         };
         setResidenceData(populatedDataResidence);
       })
@@ -103,14 +122,27 @@ function addItem(navigation: any, data: any) {
 
 async function getAllObjects(residenceId: number): Promise<any> {
   const ojbectArray = [];
-  const filter = {
-    residenceID: new Map([["residenceID", residenceId]]),
-  };
   const places: any = await API.graphql({
-    query: queries.listPlaces,
-    variables: filter,
+    query: `query ListPlaces(
+      $limit: Int
+      $nextToken: String
+    ) {
+      listPlaces(filter: {residenceID: {eq: "${residenceId}"}}, limit: $limit, nextToken: $nextToken) {
+        items {
+          id
+          pName
+          residenceID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+    }`,
   });
-  console.log("places", places);
   // Foreach place, get all containers
   for (const place of places.data.listPlaces.items) {
     const containers: any = await API.graphql({
@@ -134,14 +166,51 @@ async function getAllObjects(residenceId: number): Promise<any> {
         }
       }`,
     });
+    const formattedContainers: any = [];
+
+    for (const container of containers.data.listContainers.items) {
+      const items: any = await API.graphql({
+        query: `query ListItems(
+          $limit: Int
+          $nextToken: String
+        ) {
+          listItems(filter: { containerID: { eq: "${container.id}" } }, limit: $limit, nextToken: $nextToken) {
+            items {
+              id
+              description
+              iName
+              photo
+              containerID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
+          }
+        }`,
+      });
+      formattedContainers.push({
+        id: container.id,
+        cName: container.cName,
+        items: items.data.listItems.items.map((item: any) => {
+          return {
+            id: item.id,
+            iName: item.iName,
+            description: item.description,
+            photo: item.photo,
+          };
+        }),
+      });
+    }
 
     //TODO we are going to need to also populate each container with it's items
     ojbectArray.push({
       pName: place.pName,
       id: place.id,
-      containers: containers.data.listContainers.items.map((c: any) => {
-        return { id: c.id, cName: c.cName };
-      }),
+      containers: formattedContainers,
     });
   }
   return ojbectArray;

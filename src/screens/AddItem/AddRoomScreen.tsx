@@ -17,7 +17,6 @@ interface addRoomProps {
 }
 
 export default function AddItemRoom(props: addRoomProps) {
-  // console.log("add item room", props);
   const [text, onChangeText] = React.useState("");
   return (
     <View style={styles.container}>
@@ -35,9 +34,7 @@ export default function AddItemRoom(props: addRoomProps) {
       </Picker> 
       TODO: Room Icon functionality yet to come*/}
       <TouchableOpacity
-        onPress={() =>
-          saveRoom(props.route.params.data.getResidence, text, props.navigation)
-        }
+        onPress={() => saveRoom(props.route.params, text, props.navigation)}
         style={styles.button}
       >
         <Text>Save Room</Text>

@@ -1,10 +1,10 @@
-import { StyleSheet, SafeAreaView, FlatList, ImageURISource } from "react-native";
+import { StyleSheet, SafeAreaView, FlatList } from "react-native";
 import Item from "../components/Item";
 
 interface itemProps {
   route: {
     params: {
-      items: { name: string; description: string; image?: ImageURISource }[];
+      items: any[];
     };
   };
   navigation: any;
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   input: {
     height: 50,

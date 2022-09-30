@@ -71,6 +71,7 @@ async function saveContainer(
   containerName: string,
   navigation: any
 ) {
+  // TODO Also need to check for a valid container
   if (!containerName) {
     Alert.alert("Error with submitting", "Container must have a name ", [
       {

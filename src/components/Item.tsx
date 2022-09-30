@@ -11,7 +11,7 @@ Amplify.configure(AWSConfig);
 
 interface itemProps {
   navigation: any;
-  item: { name: string; description: string; image?: ImageURISource };
+  item: { iName: string; description: string; image?: ImageURISource };
 }
 
 export default function Item(props: itemProps) {
@@ -20,7 +20,7 @@ export default function Item(props: itemProps) {
       style={styles.item}
       onPress={() => openItemView(props.item, props.navigation)}
     >
-      <Text style={styles.itemName}>{props.item.name}</Text>
+      <Text style={styles.itemName}>{props.item.iName}</Text>
     </TouchableOpacity>
   );
 }

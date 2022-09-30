@@ -1,11 +1,14 @@
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
+import { API } from "aws-amplify";
 import {
   View,
+  ScrollView,
   StyleSheet,
   TextInput,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 interface addItemProps {
@@ -16,6 +19,8 @@ interface addItemProps {
 export default function AddItemScreen(props: addItemProps) {
   const [selectedRoom, setSelectedRoom] = useState(0);
   const [selectedContainer, setSelectedConatainer] = useState(0);
+  const [itemName, onChangeName] = useState("");
+  const [itemDescription, onChangeDescription] = useState("");
 
   const renderRoomList = () => {
     return Object.keys(props.route.params.Places).map(
@@ -32,6 +37,9 @@ export default function AddItemScreen(props: addItemProps) {
   };
 
   const renderContainerList = () => {
+    if (!props.route.params.Places[0]) {
+      return;
+    }
     return Object.keys(props.route.params.Places[selectedRoom].containers).map(
       (key: string, index: number) => {
         return (
@@ -48,11 +56,16 @@ export default function AddItemScreen(props: addItemProps) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.text}>Item name</Text>
-      <TextInput style={styles.input} placeholder="Item name" />
+      <TextInput
+        onChangeText={onChangeName}
+        style={styles.input}
+        placeholder="Item name"
+      />
       <Text style={styles.text}>Item description</Text>
       <TextInput
+        onChangeText={onChangeDescription}
         multiline={true}
         style={styles.multyInput}
         placeholder="Item description"
@@ -71,7 +84,7 @@ export default function AddItemScreen(props: addItemProps) {
       <Text style={styles.text}>Container</Text>
       <Picker
         selectedValue={
-          props.route.params.Places[selectedRoom].containers[selectedContainer]
+          props.route.params.Places[selectedRoom]?.containers[selectedContainer]
         }
         style={styles.input}
         onValueChange={(itemValue, itemIndex) => {
@@ -80,23 +93,94 @@ export default function AddItemScreen(props: addItemProps) {
       >
         {renderContainerList()}
       </Picker>
-      <TouchableOpacity onPress={() => saveItem()}></TouchableOpacity>
-    </View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>
+          saveItem(
+            props.route.params.Places[selectedRoom],
+            props.route.params.Places[selectedRoom]?.containers[
+              selectedContainer
+            ],
+            itemName,
+            itemDescription,
+            props.navigation
+          )
+        }
+      >
+        <Text>Save Item</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
 
-function saveItem() {
-  //Logic to save item goes here
+async function saveItem(
+  placeProps: any,
+  containerProps: any,
+  itemName: string,
+  itemDescription: string,
+  navigation: any
+) {
+  console.log("place", placeProps);
+  console.log("container", containerProps);
+  console.log("name", itemName);
+  console.log("description", itemDescription);
+  if (!itemName || !itemDescription || !containerProps || !placeProps) {
+    Alert.alert(
+      "Error with submitting",
+      "Item must have a name, description and valid container and place ",
+      [
+        {
+          text: "OK",
+          style: "cancel",
+        },
+      ]
+    );
+    return;
+  }
+
+  const itemDetails = {
+    iName: itemName,
+    description: itemDescription,
+    containerID: containerProps.id,
+  };
+  await API.graphql({
+    query: `mutation CreateItem(
+      $input: CreateItemInput!
+      $condition: ModelItemConditionInput
+    ) {
+      createItem(input: $input, condition: $condition) {
+        id
+        description
+        iName
+        containerID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+    }`,
+    variables: { input: itemDetails },
+  });
+
+  Alert.alert("Successfully created item", "Item name: " + itemName, [
+    {
+      text: "OK",
+      style: "cancel",
+    },
+  ]);
+  navigation.navigate("Home");
+
+  //TODO need to reset stack navigator
 }
 
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    paddingBottom: 0,
     flex: 1,
   },
   input: {
-    height: 50,
+    height: 150,
     borderBottomColor: "lightblue",
     borderBottomWidth: 2,
     margin: 10,
@@ -113,5 +197,12 @@ const styles = StyleSheet.create({
   text: {
     margin: 10,
     marginBottom: 0,
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "lightblue",
+    padding: 10,
+    margin: 10,
+    marginBottom: 30,
   },
 });

@@ -17,7 +17,7 @@ export default function AddItemNavigation(props: AddItemNavigationProps) {
   return (
     <Stack.Navigator
       initialRouteName="SelectItemType"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: true }}
     >
       <Stack.Screen name="SelectItemType" component={SelectItemType} />
       <Stack.Screen
