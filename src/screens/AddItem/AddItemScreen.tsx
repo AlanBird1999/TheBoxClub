@@ -102,6 +102,7 @@ export default function AddItemScreen(props: addItemProps) {
         }}
         style={{ width: 400, height: 400, backgroundColor: 'white' }}
       />
+      <ImagePicker></ImagePicker>
       <TouchableOpacity 
         onPress={() => saveItem()}
         style={styles.button}
