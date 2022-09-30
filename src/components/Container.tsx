@@ -16,7 +16,6 @@ interface containerProps {
 }
 
 export default function Container(props: containerProps) {
-  console.log(props);
   return (
     <TouchableOpacity
       style={styles.container}

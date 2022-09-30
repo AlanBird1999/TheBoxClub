@@ -117,6 +117,10 @@ async function saveContainer(
       },
     ]
   );
+  navigation.reset({
+    index: 0,
+    routes: [{ name: "SelectItemType" }],
+  });
   navigation.navigate("Home");
 
   //TODO need to reset stack navigator

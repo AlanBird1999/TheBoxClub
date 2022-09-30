@@ -11,22 +11,22 @@ import Amplify, { Auth } from "aws-amplify";
 import AWSConfig from "../aws-exports";
 
 import Room from "../components/Room";
-import * as queries from "../graphql/queries";
 import * as mutations from "../graphql/mutations";
 import { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
+import React from "react";
 
 Amplify.configure(AWSConfig);
 
 interface homeProps {
   navigation: any;
+  route: any;
 }
 
 export default function HomeScreen(props: homeProps) {
-  //TODO need some way to trigger reload based off props flag
-
   const [residenceData, setResidenceData] = useState(null);
   const [roomData, setRoomData] = useState(null);
+  const [loading, setLoading] = useState(true);
   if (residenceData == null)
     Auth.currentUserInfo()
       .then(async (userInfo) => {
@@ -64,11 +64,10 @@ export default function HomeScreen(props: homeProps) {
             variables: { input: residenceDetails },
           });
 
-          setResidenceData(newResidence.createResidence);
+          dataResidence.data.listResidences.items[0] =
+            newResidence.data.createResidence;
           //TODO: right around here if we want the ability to have multiple users to a single residence
           //this is where we can prompt them to give a residence head
-        } else {
-          setResidenceData(dataResidence);
         }
         const residence: any = dataResidence.data.listResidences.items[0];
 
@@ -80,6 +79,7 @@ export default function HomeScreen(props: homeProps) {
           rName: residence.rName,
         };
         setResidenceData(populatedDataResidence);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("error", error);
@@ -89,6 +89,7 @@ export default function HomeScreen(props: homeProps) {
             style: "cancel",
           },
         ]);
+        setLoading(false);
       });
 
   return (
@@ -108,7 +109,7 @@ export default function HomeScreen(props: homeProps) {
       <View style={styles.buttonView}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => addItem(props.navigation, residenceData)}
+          onPress={() => addItem(props.navigation, residenceData, loading)}
         >
           <Text style={styles.icon}>+</Text>
         </TouchableOpacity>
@@ -117,7 +118,16 @@ export default function HomeScreen(props: homeProps) {
   );
 }
 
-function addItem(navigation: any, data: any) {
+function addItem(navigation: any, data: any, loading: boolean) {
+  if (loading) {
+    Alert.alert("Still loading data", "Please wait while your data is loaded", [
+      {
+        text: "OK",
+        style: "cancel",
+      },
+    ]);
+    return;
+  }
   navigation.navigate("AddItemNavigation", data);
 }
 

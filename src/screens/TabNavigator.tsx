@@ -19,8 +19,12 @@ export function TabNavigator() {
       <Tab.Screen
         name="Home"
         component={ItemNavigation}
+        listeners={({ navigation }) => ({
+          blur: () => navigation.setParams({ screen: undefined }),
+        })}
         options={{
           tabBarLabel: "Home",
+          unmountOnBlur: true,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
