@@ -13,6 +13,7 @@ interface AddItemNavigationProps {
 }
 
 export default function AddItemNavigation(props: AddItemNavigationProps) {
+  console.log("add item nav props", props);
   return (
     <Stack.Navigator
       initialRouteName="SelectItemType"
@@ -24,8 +25,16 @@ export default function AddItemNavigation(props: AddItemNavigationProps) {
         component={AddItemScreen}
         initialParams={props.route.params}
       />
-      <Stack.Screen name="AddRoomScreen" component={AddRoomScreen} />
-      <Stack.Screen name="AddContainerScreen" component={AddContainerScreen} />
+      <Stack.Screen
+        name="AddRoomScreen"
+        component={AddRoomScreen}
+        initialParams={props.route.params}
+      />
+      <Stack.Screen
+        name="AddContainerScreen"
+        component={AddContainerScreen}
+        initialParams={props.route.params}
+      />
     </Stack.Navigator>
   );
 }

@@ -1,4 +1,11 @@
-import { ScrollView, Text, StyleSheet, TouchableOpacity, SafeAreaView, FlatList } from "react-native";
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+  FlatList,
+} from "react-native";
 import Amplify from "aws-amplify";
 import AWSConfig from "../aws-exports";
 import Container from "./Container";
@@ -12,17 +19,17 @@ interface nameProps {
 }
 
 export default function Room(props: nameProps) {
+  console.log("room props", props);
   return (
     <SafeAreaView>
       <Text style={styles.roomName}>{props.name}</Text>
-      <FlatList 
-        data={props.containers} 
+      <FlatList
+        data={props.containers}
         style={styles.contentContainer}
         horizontal={true}
         renderItem={({ item }) => (
           <Container
-            name={item.name}
-            room={props.name}
+            cName={item.cName}
             navigation={props.nav}
             items={item.items}
           ></Container>

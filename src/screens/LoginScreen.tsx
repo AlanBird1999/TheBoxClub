@@ -164,12 +164,12 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#547C7D',
-    justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "#547C7D",
+    justifyContent: "center",
   },
   text: {
-    color: 'lightblue',
+    color: "lightblue",
     fontSize: 25,
   },
   input: {
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 45,
-    color: 'lightblue',
+    color: "lightblue",
     alignSelf: "center",
     paddingBottom: 10,
   },

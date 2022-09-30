@@ -1,11 +1,4 @@
 export type AmplifyDependentResourcesAttributes = {
-    "api": {
-        "Boxie": {
-            "GraphQLAPIKeyOutput": "string",
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        }
-    },
     "auth": {
         "Boxie": {
             "IdentityPoolId": "string",
@@ -17,10 +10,11 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientID": "string"
         }
     },
-    "storage": {
-        "s3boxiestorage": {
-            "BucketName": "string",
-            "Region": "string"
+    "api": {
+        "Boxie": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
         }
     }
 }

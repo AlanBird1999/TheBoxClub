@@ -177,10 +177,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: '#547C7D',
+    backgroundColor: "#547C7D",
   },
   text: {
-    color: 'lightblue',
+    color: "lightblue",
     fontSize: 25,
   },
   scrollv: {
@@ -204,6 +204,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 45,
     alignSelf: "center",
-    color: 'lightblue',
+    color: "lightblue",
   },
 });

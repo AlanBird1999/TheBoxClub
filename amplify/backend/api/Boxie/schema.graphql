@@ -1,31 +1,33 @@
-type Item @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
-  Description: String
-  iName: String!
-  Photo: String
-}
-
-type Container @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  Place: String
-  placeID: ID! @index(name: "byPlace")
+  userName: String
+  Residence: Residence @hasOne
 }
 
 type Residence @model @auth(rules: [{allow: public}]) {
   id: ID!
   rName: String
-  users: [User] @manyToMany(relationName: "UserResidence")
-  Place: Place @hasOne
+  Places: [Place] @hasMany(indexName: "byResidence", fields: ["id"])
 }
 
 type Place @model @auth(rules: [{allow: public}]) {
   id: ID!
-  pName: String!
+  pName: String
   Containers: [Container] @hasMany(indexName: "byPlace", fields: ["id"])
+  residenceID: ID! @index(name: "byResidence")
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type Container @model @auth(rules: [{allow: public}]) {
   id: ID!
-  UserName: String
-  Residences: [Residence] @manyToMany(relationName: "UserResidence")
+  cName: String
+  Items: [Item] @hasMany(indexName: "byContainer", fields: ["id"])
+  placeID: ID! @index(name: "byPlace")
+}
+
+type Item @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  description: String
+  iName: String
+  photo: String
+  containerID: ID! @index(name: "byContainer")
 }

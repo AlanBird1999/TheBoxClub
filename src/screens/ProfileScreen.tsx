@@ -29,13 +29,11 @@ export default function ProfileScreen(props: profileProps) {
         source={require("../../assets/default-box.png")}
       ></Image>
       <Text style={styles.text}>Username: {userEmail || "Loading ..."}</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text
-          style={styles.text}
-          onPress={() => logout(props.navigation)}
-        >
-          Log Out
-        </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => logout(props.navigation)}
+      >
+        <Text style={styles.text}>Log Out</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -73,9 +71,9 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#547C7D',
-    justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "#547C7D",
+    justifyContent: "center",
   },
   image: {
     height: 100,
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
     width: 400,
   },
   text: {
-    color: 'lightblue',
-    fontSize: 25
-  }
+    color: "lightblue",
+    fontSize: 25,
+  },
 });

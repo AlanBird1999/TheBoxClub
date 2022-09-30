@@ -11,6 +11,7 @@ interface selectItemProps {
 }
 
 export default function SelectItemType(props: selectItemProps) {
+  console.log("select item type props: ", props);
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>What would you like to add?</Text>
@@ -47,12 +48,12 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     flex: 1,
     backgroundColor: "#547C7D",
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 45,
-    color: 'lightblue',
+    color: "lightblue",
     alignSelf: "center",
     paddingBottom: 10,
   },
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     width: 400,
   },
   text: {
-    color: 'lightblue',
+    color: "lightblue",
     fontSize: 25,
   },
 });

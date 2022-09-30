@@ -175,11 +175,11 @@ export default function LoginScreen(props: loginProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#547C7D',
-    justifyContent: 'center',
+    backgroundColor: "#547C7D",
+    justifyContent: "center",
   },
   text: {
-    color: 'lightblue',
+    color: "lightblue",
     fontSize: 25,
   },
   scrollv: {
@@ -203,6 +203,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 45,
     alignSelf: "center",
-    color: 'lightblue',
+    color: "lightblue",
   },
 });
