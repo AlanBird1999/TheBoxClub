@@ -1,5 +1,5 @@
 import {
-  View,
+  SafeAreaView,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -12,27 +12,27 @@ interface selectItemProps {
 
 export default function SelectItemType(props: selectItemProps) {
   return (
-    <View style={styles.container}>
-      <Text>What would you like to add?</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>What would you like to add?</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigateTo("AddRoomScreen", props.navigation)}
       >
-        <Text>Room</Text>
+        <Text style={styles.text}>Room</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigateTo("AddContainerScreen", props.navigation)}
       >
-        <Text>Container</Text>
+        <Text style={styles.text}>Container</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigateTo("AddItemScreen", props.navigation)}
       >
-        <Text>Item</Text>
+        <Text style={styles.text}>Item</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -46,6 +46,15 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 0,
     flex: 1,
+    backgroundColor: "#547C7D",
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 45,
+    color: 'lightblue',
+    alignSelf: "center",
+    paddingBottom: 10,
   },
   input: {
     height: 50,
@@ -55,10 +64,13 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    justifyContent: "center",
-    margin: 20,
-    height: 60,
-    borderRadius: 100,
-    backgroundColor: "#A1CAF1",
+    backgroundColor: "black",
+    padding: 10,
+    margin: 10,
+    width: 400,
+  },
+  text: {
+    color: 'lightblue',
+    fontSize: 25,
   },
 });
