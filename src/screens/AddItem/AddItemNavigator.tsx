@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
@@ -39,4 +38,3 @@ export default function AddItemNavigation(props: AddItemNavigationProps) {
     </Stack.Navigator>
   );
 }
->>>>>>> 60354bede225b0ec862e5386a361d63daeb52861

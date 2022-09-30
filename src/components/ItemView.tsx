@@ -1,10 +1,17 @@
-import { View, SafeAreaView, Image, ImageURISource, Text, StyleSheet } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Image,
+  ImageURISource,
+  Text,
+  StyleSheet,
+} from "react-native";
 
 interface itemViewProps {
   route: {
     params: {
       image?: ImageURISource;
-      name: string;
+      iName: string;
       description: string;
     };
   };
@@ -21,8 +28,10 @@ export default function ItemView(props: itemViewProps) {
         }
       ></Image>
       <View style={styles.itemText}>
-        <Text style={styles.text}>Name: {props.route.params.name}</Text>
-        <Text style={styles.text}>Description: {props.route.params.description}</Text>
+        <Text style={styles.text}>Name: {props.route.params.iName}</Text>
+        <Text style={styles.text}>
+          Description: {props.route.params.description}
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -33,17 +42,13 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   image: {
     width: 100,
     height: 100,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
-  itemText: {
-    
-  },
-  text: {
-    
-  },
+  itemText: {},
+  text: {},
 });
