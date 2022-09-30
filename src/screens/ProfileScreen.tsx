@@ -29,13 +29,13 @@ export default function ProfileScreen(props: profileProps) {
         source={require("../../assets/default-box.png")}
       ></Image>
       <Text>Name: {userEmail || "Loading ..."}</Text>
-      <TouchableOpacity style={styles.logoutButton}>
-        <Text
-          style={styles.logoutText}
-          onPress={() => logout(props.navigation)}
-        >
+      <TouchableOpacity style={styles.logoutButton}
+      onPress={() => logout(props.navigation)}
+    >
+        <Text style={styles.logoutText}>
           Log out
         </Text>
+
       </TouchableOpacity>
     </View>
   );
