@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   StyleSheet,
   Text,
@@ -223,12 +222,12 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#547C7D',
+    alignItems: "center",
+    backgroundColor: "#547C7D",
   },
   title: {
     fontSize: 35,
-    color: 'lightblue',
+    color: "lightblue",
     padding: 25,
   },
   input: {

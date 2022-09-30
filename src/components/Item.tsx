@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   Text,
   StyleSheet,
@@ -45,4 +44,3 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
->>>>>>> 7b2323de3888acef9442f4e31e33b4b788a2df68
