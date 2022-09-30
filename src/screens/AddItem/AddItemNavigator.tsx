@@ -13,7 +13,6 @@ interface AddItemNavigationProps {
 }
 
 export default function AddItemNavigation(props: AddItemNavigationProps) {
-  console.log("add item nav props", props);
   return (
     <Stack.Navigator
       initialRouteName="SelectItemType"

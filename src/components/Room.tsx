@@ -19,7 +19,6 @@ interface nameProps {
 }
 
 export default function Room(props: nameProps) {
-  console.log("room props", props);
   return (
     <SafeAreaView>
       <Text style={styles.roomName}>{props.name}</Text>

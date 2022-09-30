@@ -120,10 +120,6 @@ async function saveItem(
   itemDescription: string,
   navigation: any
 ) {
-  console.log("place", placeProps);
-  console.log("container", containerProps);
-  console.log("name", itemName);
-  console.log("description", itemDescription);
   if (!itemName || !itemDescription || !containerProps || !placeProps) {
     Alert.alert(
       "Error with submitting",
@@ -169,6 +165,10 @@ async function saveItem(
       style: "cancel",
     },
   ]);
+  navigation.reset({
+    index: 0,
+    routes: [{ name: "SelectItemType" }],
+  });
   navigation.navigate("Home");
 
   //TODO need to reset stack navigator

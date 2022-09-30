@@ -48,7 +48,6 @@ async function saveRoom(
   placeName: string,
   navigation: any
 ) {
-  // console.log("pressed save room, residence props", residenceProps);
   const placeDetails = {
     pName: placeName,
     residenceID: residenceProps.id,
@@ -64,6 +63,10 @@ async function saveRoom(
       style: "cancel",
     },
   ]);
+  navigation.reset({
+    index: 0,
+    routes: [{ name: "SelectItemType" }],
+  });
   navigation.navigate("Home");
 }
 

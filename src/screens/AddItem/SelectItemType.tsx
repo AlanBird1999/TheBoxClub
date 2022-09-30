@@ -11,7 +11,6 @@ interface selectItemProps {
 }
 
 export default function SelectItemType(props: selectItemProps) {
-  console.log("select item type props: ", props);
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>What would you like to add?</Text>
