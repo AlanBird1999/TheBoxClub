@@ -19,6 +19,7 @@ interface nameProps {
 }
 
 export default function Room(props: nameProps) {
+  console.log("room props", props);
   return (
     <SafeAreaView>
       <Text style={styles.roomName}>{props.name}</Text>
@@ -28,8 +29,7 @@ export default function Room(props: nameProps) {
         horizontal={true}
         renderItem={({ item }) => (
           <Container
-            name={item.name}
-            room={props.name}
+            cName={item.cName}
             navigation={props.nav}
             items={item.items}
           ></Container>
