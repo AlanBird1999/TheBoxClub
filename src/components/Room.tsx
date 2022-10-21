@@ -28,6 +28,7 @@ export default function Room(props: nameProps) {
         horizontal={true}
         renderItem={({ item }) => (
           <Container
+            pName={props.name}
             cName={item.cName}
             navigation={props.nav}
             items={item.items}

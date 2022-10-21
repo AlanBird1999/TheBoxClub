@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  Image,
 } from "react-native";
 import Amplify, { Auth } from "aws-amplify";
 import AWSConfig from "../aws-exports";
@@ -27,6 +28,8 @@ export default function HomeScreen(props: homeProps) {
   const [residenceData, setResidenceData] = useState(null);
   const [roomData, setRoomData] = useState(null);
   const [loading, setLoading] = useState(true);
+  // TODO possible logic for reload only on command?
+  // if props.route.params.reloadItems setResidenceData(null);
   if (residenceData == null)
     Auth.currentUserInfo()
       .then(async (userInfo) => {
@@ -92,9 +95,27 @@ export default function HomeScreen(props: homeProps) {
         setLoading(false);
       });
 
+  if (props.route.params?.containerId && !loading) {
+    navigateItem(
+      props.route.params.containerId,
+      residenceData,
+      props.navigation
+    );
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>BOXIE</Text>
+      {loading ? (
+        <View>
+          <Image
+            style={styles.loadingGif}
+            source={require("../../assets/box-load-gif.gif")}
+          />
+          <Text style={styles.loadingText}>Loading...</Text>
+        </View>
+      ) : null}
       <FlatList
         numColumns={1}
         data={roomData}
@@ -116,6 +137,36 @@ export default function HomeScreen(props: homeProps) {
       </View>
     </SafeAreaView>
   );
+}
+
+async function navigateItem(
+  containerId: string,
+  residenceData: any,
+  navigation: any
+) {
+  for (const place of residenceData?.Places) {
+    for (const container of place.containers) {
+      if (container.id === containerId) {
+        navigation.navigate("ItemScreen", {
+          items: container.items,
+          room: place.pName,
+          container: container.cName,
+        });
+        return;
+      }
+    }
+  }
+  Alert.alert(
+    "Error scanning qr code",
+    "An item with the provided id does not exist.",
+    [
+      {
+        text: "OK",
+        style: "cancel",
+      },
+    ]
+  );
+  return;
 }
 
 function addItem(navigation: any, data: any, loading: boolean) {
@@ -228,6 +279,16 @@ async function getAllObjects(residenceId: number): Promise<any> {
 }
 
 const styles = StyleSheet.create({
+  loadingGif: {
+    maxWidth: "100%",
+    maxHeight: "50%",
+    opacity: 0.5,
+    resizeMode: "contain",
+  },
+  loadingText: {
+    textAlign: "center",
+    fontSize: 30,
+  },
   container: {
     padding: 20,
     paddingBottom: 0,

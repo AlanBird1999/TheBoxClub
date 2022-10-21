@@ -11,6 +11,8 @@ interface itemProps {
   route: {
     params: {
       items: any[];
+      room: string;
+      container: string;
     };
   };
   navigation: any;
@@ -20,7 +22,7 @@ export default function ItemScreen(props: itemProps) {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>
-        {props.room} // {props.container}
+        {props.route.params.room} // {props.route.params.container}
       </Text>
       <FlatList
         numColumns={2}

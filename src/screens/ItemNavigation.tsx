@@ -7,13 +7,27 @@ import HomeScreen from "./HomeScreen";
 
 const Stack = createNativeStackNavigator();
 
-export default function ItemNavigation() {
+export default function ItemNavigation(props: any) {
   return (
     <Stack.Navigator
       initialRouteName="Login"
       screenOptions={{ headerShown: true }}
     >
-      <Stack.Screen name="Rooms" component={HomeScreen} />
+      <Stack.Screen
+        name="Rooms"
+        component={HomeScreen}
+        listeners={({ navigation }) => ({
+          focus: () =>
+            navigation.setParams({
+              containerId: props.route.params?.containerId,
+            }),
+          blur: () => {
+            props.navigation.setParams({
+              containerId: null,
+            });
+          },
+        })}
+      />
       <Stack.Screen name="ItemScreen" component={Item_Screen} />
       <Stack.Screen name="ItemViewScreen" component={Item_View_Screen} />
     </Stack.Navigator>
