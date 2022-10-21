@@ -10,6 +10,7 @@ import AWSConfig from "../aws-exports";
 Amplify.configure(AWSConfig);
 
 interface containerProps {
+  pName: string;
   cName: string;
   navigation: any;
   items: { name: string; description: string; image?: ImageURISource }[];
@@ -19,15 +20,19 @@ export default function Container(props: containerProps) {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => openItems(props.items, props.navigation)}
+      onPress={() => openItems(props, props.navigation)}
     >
       <Text style={styles.roomName}>{props.cName}</Text>
     </TouchableOpacity>
   );
 }
 
-function openItems(items: any, navigation: any) {
-  navigation.navigate("ItemScreen", { items });
+function openItems(props: containerProps, navigation: any) {
+  navigation.navigate("ItemScreen", {
+    items: props.items,
+    container: props.cName,
+    room: props.pName,
+  });
 }
 
 const styles = StyleSheet.create({
