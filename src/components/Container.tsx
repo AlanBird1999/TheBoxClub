@@ -13,7 +13,7 @@ interface containerProps {
   pName: string;
   cName: string;
   navigation: any;
-  items: { name: string; description: string; image?: ImageURISource }[];
+  items: { name: string; description: string; image?: string }[];
 }
 
 export default function Container(props: containerProps) {

@@ -1,6 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
-import { API } from "aws-amplify";
+import { API, Amplify, Storage } from "aws-amplify";
 import {
   View,
   ScrollView,
@@ -22,6 +22,7 @@ export default function AddItemScreen(props: addItemProps) {
   const [selectedContainer, setSelectedConatainer] = useState(0);
   const [itemName, onChangeName] = useState("");
   const [itemDescription, onChangeDescription] = useState("");
+  const [image, setImage] = useState(null);
 
   const renderRoomList = () => {
     return Object.keys(props.route.params.Places).map(
@@ -94,7 +95,9 @@ export default function AddItemScreen(props: addItemProps) {
       >
         {renderContainerList()}
       </Picker>
-      <ImagePicker></ImagePicker>
+      <ImagePicker upload={(imageUri: any) => {
+        setImage(imageUri)
+      }}/>
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
@@ -105,7 +108,8 @@ export default function AddItemScreen(props: addItemProps) {
             ],
             itemName,
             itemDescription,
-            props.navigation
+            props.navigation,
+            image
           )
         }
       >
@@ -120,7 +124,8 @@ async function saveItem(
   containerProps: any,
   itemName: string,
   itemDescription: string,
-  navigation: any
+  navigation: any,
+  imageUri: any
 ) {
   if (!itemName || !itemDescription || !containerProps || !placeProps) {
     Alert.alert(
@@ -136,10 +141,15 @@ async function saveItem(
     return;
   }
 
+  const uploadResult = await pathToImageFile(itemName, imageUri);
+
+  console.log(uploadResult);
+
   const itemDetails = {
     iName: itemName,
     description: itemDescription,
     containerID: containerProps.id,
+    photo: uploadResult,
   };
   await API.graphql({
     query: `mutation CreateItem(
@@ -174,6 +184,16 @@ async function saveItem(
   navigation.navigate("Home");
 
   //TODO need to reset stack navigator
+}
+
+async function pathToImageFile(iName: string, imageUri: any) {
+  try {
+    const response = await fetch(imageUri);
+    const blob = await response.blob();
+    return await Storage.put(iName, blob);
+  } catch (err) {
+    console.log('Error uploading file:', err);
+  }
 }
 
 const styles = StyleSheet.create({

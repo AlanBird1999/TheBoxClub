@@ -11,7 +11,7 @@ Amplify.configure(AWSConfig);
 
 interface itemProps {
   navigation: any;
-  item: { iName: string; description: string; image?: ImageURISource };
+  item: { iName: string; description: string; photo?: string };
 }
 
 export default function Item(props: itemProps) {

@@ -7,10 +7,14 @@ import {
   StyleSheet,
 } from "react-native";
 
+import {Amplify, Storage} from "aws-amplify";
+import { useState } from "react";
+import { getAmplifyUserAgent } from "@aws-amplify/core";
+
 interface itemViewProps {
   route: {
     params: {
-      image?: ImageURISource;
+      photo?: string;
       iName: string;
       description: string;
     };
@@ -19,12 +23,27 @@ interface itemViewProps {
 }
 
 export default function ItemView(props: itemViewProps) {
+  const [image, setImage] = useState(null);
+
+  let imageUri = props.route.params.photo;
+
+  console.log("image uri:", imageUri)
+
+  if(imageUri){
+    try {
+      getImage(setImage, imageUri);
+    } catch(err) {
+      console.log("error getting image from s3!\n", err);
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.image}
         source={
-          props.route.params.image || require("../../assets/default-box.png")
+          // this image piece is not going in quite right
+          image || require("../../assets/default-box.png")
         }
       ></Image>
       <View style={styles.itemText}>
@@ -35,6 +54,16 @@ export default function ItemView(props: itemViewProps) {
       </View>
     </SafeAreaView>
   );
+}
+
+async function getImage(setImage: any, imageUri: string) {
+  const result = await Storage.get(imageUri, {
+    download: true,
+  });
+
+  console.log("result from s3:", result)
+
+  setImage(result);
 }
 
 const styles = StyleSheet.create({
