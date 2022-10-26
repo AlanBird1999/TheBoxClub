@@ -15,10 +15,14 @@ export default function ImagePicker() {
     });
 
     if (!result.cancelled) {
-      // setImage(result.uri);
+      setImage(result.uri);
       console.log("there was a problem");
     }
   };
+
+  const getImage = async () => {
+    return image;
+  }
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>

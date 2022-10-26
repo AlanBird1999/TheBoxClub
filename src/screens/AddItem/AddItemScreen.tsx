@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import ImagePicker from "../../components/ImagePicker";
 
 interface addItemProps {
   navigation: any;
@@ -93,6 +94,7 @@ export default function AddItemScreen(props: addItemProps) {
       >
         {renderContainerList()}
       </Picker>
+      <ImagePicker></ImagePicker>
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
