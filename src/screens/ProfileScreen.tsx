@@ -69,6 +69,7 @@ function printQRCodes(navigation:any) {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
+  // TODO: Need to attach appropriate fields in here
   var raw = JSON.stringify({
     "containers": [
       {
@@ -93,7 +94,7 @@ function printQRCodes(navigation:any) {
     redirect: 'follow'
   })
     .then(response => response.text())
-    .then(result => console.log(result))
+    .then(result => console.log(result)) // TODO: Use this result to pull up a PDF viewer
     .catch(error => console.log('error', error));
 }
 
