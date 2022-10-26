@@ -35,8 +35,66 @@ export default function ProfileScreen(props: profileProps) {
       >
         <Text style={styles.text}>Log Out</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => printQRCodes(props.navigation)
+        }
+      >
+        <Text style={styles.text}>Print All QR Codes</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
+}
+
+function printQRCodes(navigation:any) {
+  // return fetch("https://q3zo38dhlg.execute-api.us-east-1.amazonaws.com/default/generateAndSaveQRCode", {
+  //   method:'POST',
+  //   headers: {
+  //     'Content-Encoding':'base64'
+  //   },
+  //   body: JSON.stringify({
+  //     "containers": [
+  //         {
+  //             containerID: "apple.com",
+  //             containerName: "AppleCONT",
+  //             roomName: "AppleROOM"
+  //         }
+  //     ]
+  // })
+  // })
+  // .then((response) => response.blob())
+  // .then((json) => console.log(base64.decode(json)))
+  // .catch((error) => console.error("API Call not successful", error))
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "containers": [
+      {
+        "containerID": "apple.com",
+        "containerName": "AppleCONT",
+        "roomName": "AppleROOM"
+      }
+    ]
+  });
+
+  var requestOptionss = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("https://q3zo38dhlg.execute-api.us-east-1.amazonaws.com/default/generateAndSaveQRCode", {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  })
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 }
 
 function logout(navigation: any) {
