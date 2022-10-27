@@ -47,25 +47,6 @@ export default function ProfileScreen(props: profileProps) {
 }
 
 function printQRCodes(navigation:any) {
-  // return fetch("https://q3zo38dhlg.execute-api.us-east-1.amazonaws.com/default/generateAndSaveQRCode", {
-  //   method:'POST',
-  //   headers: {
-  //     'Content-Encoding':'base64'
-  //   },
-  //   body: JSON.stringify({
-  //     "containers": [
-  //         {
-  //             containerID: "apple.com",
-  //             containerName: "AppleCONT",
-  //             roomName: "AppleROOM"
-  //         }
-  //     ]
-  // })
-  // })
-  // .then((response) => response.blob())
-  // .then((json) => console.log(base64.decode(json)))
-  // .catch((error) => console.error("API Call not successful", error))
-
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -79,13 +60,6 @@ function printQRCodes(navigation:any) {
       }
     ]
   });
-
-  var requestOptionss = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-  };
 
   fetch("https://q3zo38dhlg.execute-api.us-east-1.amazonaws.com/default/generateAndSaveQRCode", {
     method: 'POST',
