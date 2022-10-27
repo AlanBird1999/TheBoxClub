@@ -5,11 +5,20 @@ import {
   ImageURISource,
   Text,
   StyleSheet,
+  Button,
 } from "react-native";
 
 import {Amplify, Storage} from "aws-amplify";
 import { useState } from "react";
 import { getAmplifyUserAgent } from "@aws-amplify/core";
+
+import awsconfig from '../aws-exports';
+
+// THIS IS ANOTHER OPTION FOR GETTING IT TO WORK!!
+
+import { withAuthenticator, S3Image } from 'aws-amplify-react-native';
+
+Amplify.configure(awsconfig);
 
 interface itemViewProps {
   route: {
@@ -25,20 +34,19 @@ interface itemViewProps {
 export default function ItemView(props: itemViewProps) {
   const [image, setImage] = useState(null);
 
-  let imageUri = props.route.params.photo;
-
-  console.log("image uri:", imageUri)
-
-  if(imageUri){
-    try {
-      getImage(setImage, imageUri);
-    } catch(err) {
-      console.log("error getting image from s3!\n", err);
-    }
-  }
+  let imageKey = props.route.params.photo;
 
   return (
     <SafeAreaView style={styles.container}>
+      <Button 
+        title="See photo!" 
+        onPress={() => {
+          getImage(setImage, imageKey)
+        }}
+      />
+      {image && (
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+      )}
       <Image
         style={styles.image}
         source={
@@ -56,13 +64,21 @@ export default function ItemView(props: itemViewProps) {
   );
 }
 
-async function getImage(setImage: any, imageUri: string) {
-  const result = await Storage.get(imageUri, {
-    download: true,
-  });
+const getImage = async (setImage: any, imageKey: string | undefined) => {
+  let result;
 
-  console.log("result from s3:", result)
+  if(!imageKey) {
+    result = "../../assets/default-box.png";
+  } else {
+    try{
+      result = await Storage.get("https://boxie-image-storage132638-dev.s3.amazonaws.com/public/Small+cactus");
+    } catch (err) {
+      result = "../../assets/default-box.png";
+    }
+  }
 
+  console.log("result from s3", result);
+  
   setImage(result);
 }
 
