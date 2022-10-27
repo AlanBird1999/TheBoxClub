@@ -1,7 +1,7 @@
 
 
-export function printQRCodes(containers : any[]) {
-    const containerJSON = containers.map((container) => {
+export function printQRCodes(container_array : any[]) {
+    const containers = container_array.map((container) => {
         return {
             "containerID": container.id,
             "containerName": container.cName,
@@ -15,10 +15,10 @@ export function printQRCodes(containers : any[]) {
     fetch("https://q3zo38dhlg.execute-api.us-east-1.amazonaws.com/default/generateAndSaveQRCode", {
       method: 'POST',
       headers: myHeaders,
-      body: JSON.stringify({containerJSON}),
+      body: JSON.stringify({containers}),
       redirect: 'follow'
     })
       .then(response => response.text())
-    //   .then(result => console.log(result)) // TODO: Use this result to pull up a PDF viewer
+      .then(result => console.log(result)) // TODO: Use this result to pull up a PDF viewer
       .catch(error => console.log('error', error));
   }
