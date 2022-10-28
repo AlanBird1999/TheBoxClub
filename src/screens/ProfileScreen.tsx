@@ -35,8 +35,41 @@ export default function ProfileScreen(props: profileProps) {
       >
         <Text style={styles.text}>Log Out</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => printQRCodes(props.navigation)
+        }
+      >
+        <Text style={styles.text}>Print All QR Codes</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
+}
+
+function printQRCodes(navigation:any) {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  // TODO: Need to attach appropriate fields in here
+  var raw = JSON.stringify({
+    "containers": [
+      {
+        "containerID": "apple.com",
+        "containerName": "AppleCONT",
+        "roomName": "AppleROOM"
+      }
+    ]
+  });
+
+  fetch("https://q3zo38dhlg.execute-api.us-east-1.amazonaws.com/default/generateAndSaveQRCode", {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  })
+    .then(response => response.text())
+    .then(result => console.log(result)) // TODO: Use this result to pull up a PDF viewer
+    .catch(error => console.log('error', error));
 }
 
 function logout(navigation: any) {
