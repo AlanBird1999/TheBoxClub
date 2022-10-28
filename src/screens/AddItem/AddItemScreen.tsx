@@ -95,9 +95,11 @@ export default function AddItemScreen(props: addItemProps) {
       >
         {renderContainerList()}
       </Picker>
-      <ImagePicker upload={(imageUri: any) => {
-        setImage(imageUri)
-      }}/>
+      <ImagePicker
+        upload={(imageUri: any) => {
+          setImage(imageUri);
+        }}
+      />
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
@@ -144,11 +146,9 @@ async function saveItem(
   const uploadResult = await pathToImageFile(itemName, imageUri);
 
   let url;
-  if(uploadResult) {
-    url = await Storage.get(uploadResult.key);
+  if (uploadResult) {
+    url = uploadResult.key;
   }
-
-  console.log(uploadResult);
 
   const itemDetails = {
     iName: itemName,
@@ -196,10 +196,11 @@ async function pathToImageFile(iName: string, imageUri: any) {
     const response = await fetch(imageUri);
     const blob = await response.blob();
     return await Storage.put(iName, blob, {
-      contentType: 'image/jpeg',
+      contentType: "image/jpeg",
+      expires: new Date("2023-1-1"),
     });
   } catch (err) {
-    console.log('Error uploading file:', err);
+    console.log("Error uploading file:", err);
   }
 }
 

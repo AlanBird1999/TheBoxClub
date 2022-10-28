@@ -18,6 +18,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import React from "react";
 import { printQRCodes } from "../QRService";
 import { listPlaces } from "../graphql/queries";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 Amplify.configure(AWSConfig);
 
@@ -134,7 +135,7 @@ export default function HomeScreen(props: homeProps) {
           style={styles.button}
           onPress={() => printAll(residenceData, loading)} // print something
         >
-          <Text style={styles.icon}>QR</Text>
+          <MaterialCommunityIcons name="qrcode" color={"#FFFFFF"} size={30} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -143,15 +144,11 @@ export default function HomeScreen(props: homeProps) {
           <Text style={styles.icon}>+</Text>
         </TouchableOpacity>
       </View>
-
     </SafeAreaView>
   );
 }
 
-function printAll(
-  residenceData : any,
-  loading : boolean
-) {
+function printAll(residenceData: any, loading: boolean) {
   if (loading) {
     Alert.alert("Still loading data", "Please wait while your data is loaded", [
       {
@@ -161,14 +158,17 @@ function printAll(
     ]);
     return;
   }
-  
-  printQRCodes(residenceData.Places.map((place : any) => { return place.containers.map((container : any) => { 
-    return {
-    "pName": place.pName,
-    ... container
-  }
-  })}).flat(1));
 
+  printQRCodes(
+    residenceData.Places.map((place: any) => {
+      return place.containers.map((container: any) => {
+        return {
+          pName: place.pName,
+          ...container,
+        };
+      });
+    }).flat(1)
+  );
 }
 
 async function navigateItem(
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 100,
     backgroundColor: "#A1CAF1",
-    margin: 5
+    margin: 5,
   },
   icon: {
     fontSize: 40,
