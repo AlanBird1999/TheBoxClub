@@ -32,26 +32,14 @@ interface itemViewProps {
 }
 
 export default function ItemView(props: itemViewProps) {
-  const [image, setImage] = useState(null);
-
   let imageKey = props.route.params.photo;
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button 
-        title="See photo!" 
-        onPress={() => {
-          getImage(setImage, imageKey)
-        }}
-      />
-      {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )}
       <Image
         style={styles.image}
         source={
-          // this image piece is not going in quite right
-          image || require("../../assets/default-box.png")
+          { uri: imageKey }
         }
       ></Image>
       <View style={styles.itemText}>
@@ -64,24 +52,6 @@ export default function ItemView(props: itemViewProps) {
   );
 }
 
-const getImage = async (setImage: any, imageKey: string | undefined) => {
-  let result;
-
-  if(!imageKey) {
-    result = "../../assets/default-box.png";
-  } else {
-    try{
-      result = await Storage.get("https://boxie-image-storage132638-dev.s3.amazonaws.com/public/Small+cactus");
-    } catch (err) {
-      result = "../../assets/default-box.png";
-    }
-  }
-
-  console.log("result from s3", result);
-  
-  setImage(result);
-}
-
 const styles = StyleSheet.create({
   container: {
     padding: 20,
@@ -90,8 +60,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     alignSelf: "center",
   },
   itemText: {},

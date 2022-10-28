@@ -143,13 +143,18 @@ async function saveItem(
 
   const uploadResult = await pathToImageFile(itemName, imageUri);
 
+  let url;
+  if(uploadResult) {
+    url = await Storage.get(uploadResult.key);
+  }
+
   console.log(uploadResult);
 
   const itemDetails = {
     iName: itemName,
     description: itemDescription,
     containerID: containerProps.id,
-    photo: uploadResult,
+    photo: url,
   };
   await API.graphql({
     query: `mutation CreateItem(
@@ -190,7 +195,9 @@ async function pathToImageFile(iName: string, imageUri: any) {
   try {
     const response = await fetch(imageUri);
     const blob = await response.blob();
-    return await Storage.put(iName, blob);
+    return await Storage.put(iName, blob, {
+      contentType: 'image/jpeg',
+    });
   } catch (err) {
     console.log('Error uploading file:', err);
   }
