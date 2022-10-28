@@ -1,0 +1,13 @@
+{
+  "resourceName": "images",
+  "policyUUID": "5cf6a836",
+  "bucketName": "boxie-image-storage",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

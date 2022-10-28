@@ -1,4 +1,8 @@
-import { ModelInit, MutableModel } from "@aws-amplify/datastore";
+import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
+
+
+
+
 
 type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';

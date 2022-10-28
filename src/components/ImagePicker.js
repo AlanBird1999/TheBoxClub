@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Image, View, Platform } from "react-native";
 import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
 
-export default function ImagePicker() {
+export default function ImagePicker(props) {
   const [image, setImage] = useState(null);
 
   const pickImage = async () => {
@@ -15,10 +15,14 @@ export default function ImagePicker() {
     });
 
     if (!result.cancelled) {
-      // setImage(result.uri);
-      console.log("there was a problem");
+      setImage(result.uri);
+      props.upload(result.uri);
     }
   };
+
+  const getImage = async () => {
+    return image;
+  }
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>

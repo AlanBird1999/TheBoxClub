@@ -5,12 +5,25 @@ import {
   ImageURISource,
   Text,
   StyleSheet,
+  Button,
 } from "react-native";
+
+import {Amplify, Storage} from "aws-amplify";
+import { useState } from "react";
+import { getAmplifyUserAgent } from "@aws-amplify/core";
+
+import awsconfig from '../aws-exports';
+
+// THIS IS ANOTHER OPTION FOR GETTING IT TO WORK!!
+
+import { withAuthenticator, S3Image } from 'aws-amplify-react-native';
+
+Amplify.configure(awsconfig);
 
 interface itemViewProps {
   route: {
     params: {
-      image?: ImageURISource;
+      photo?: string;
       iName: string;
       description: string;
     };
@@ -19,12 +32,14 @@ interface itemViewProps {
 }
 
 export default function ItemView(props: itemViewProps) {
+  let imageKey = props.route.params.photo;
+
   return (
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.image}
         source={
-          props.route.params.image || require("../../assets/default-box.png")
+          { uri: imageKey }
         }
       ></Image>
       <View style={styles.itemText}>
@@ -45,8 +60,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     alignSelf: "center",
   },
   itemText: {},
