@@ -18,7 +18,7 @@ Project:    Boxie
     ```
     Please choose the profile you want to use: anything works
     Which app are you working on?: Boxie
-    Pick a backend environment: staging
+    Pick a backend environment: dev
     Choose your default editor: Visual Studio Code
     Choose the type of app that youre building: javascript
     What javascript framework are you using: react-native
