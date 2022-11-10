@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import Item_Screen from "./ItemScreen";
 import Item_View_Screen from "../components/ItemView";
+import Password_Reset_Screen from "../components/PasswordReset";
 import HomeScreen from "./HomeScreen";
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +31,7 @@ export default function ItemNavigation(props: any) {
       />
       <Stack.Screen name="ItemScreen" component={Item_Screen} />
       <Stack.Screen name="ItemViewScreen" component={Item_View_Screen} />
+      <Stack.Screen name="PasswordResetScreen" component={Password_Reset_Screen}/>
     </Stack.Navigator>
   );
 }
