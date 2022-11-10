@@ -26,9 +26,21 @@ export default function ProfileScreen(props: profileProps) {
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../assets/default-box.png")}
+        source={require("../../assets/BOXIELogo.png")}
       ></Image>
       <Text style={styles.text}>Username: {userEmail || "Loading ..."}</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => logout(props.navigation)}
+      >
+        <Text style={styles.text}>Change password</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => logout(props.navigation)}
+      >
+        <Text style={styles.text}>Change email</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => logout(props.navigation)}
@@ -37,6 +49,14 @@ export default function ProfileScreen(props: profileProps) {
       </TouchableOpacity>
     </SafeAreaView>
   );
+}
+
+function changeEmail() {
+  console.log("hit change email");
+}
+
+function changePassword() {
+  console.log("hit change password");
 }
 
 function logout(navigation: any) {
@@ -76,8 +96,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 200,
+    width: 200,
   },
   button: {
     alignItems: "center",
