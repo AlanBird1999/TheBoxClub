@@ -28,16 +28,16 @@ export default function ProfileScreen(props: profileProps) {
         style={styles.image}
         source={require("../../assets/BOXIELogo.png")}
       ></Image>
-      <Text style={styles.text}>Username: {userEmail || "Loading ..."}</Text>
+      <Text style={styles.text}>Username/Email: {userEmail || "Loading ..."}</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => logout(props.navigation)}
+        onPress={() => changePassword(props.navigation)}
       >
         <Text style={styles.text}>Change password</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => logout(props.navigation)}
+        onPress={() => changeEmail(props.navigation)}
       >
         <Text style={styles.text}>Change email</Text>
       </TouchableOpacity>
@@ -51,12 +51,12 @@ export default function ProfileScreen(props: profileProps) {
   );
 }
 
-function changeEmail() {
-  console.log("hit change email");
+function changeEmail(navigation: any) {
+  navigation.navigate("ChangeEmail");
 }
 
-function changePassword() {
-  console.log("hit change password");
+function changePassword(navigation: any) {
+  navigation.navigate("ChangePassword");
 }
 
 function logout(navigation: any) {
