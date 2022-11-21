@@ -42,3 +42,7 @@ export async function printQRCodes(container_array: any[]) {
       ]);
     });
 }
+
+export async function printInsuranceForm(item_array: any[]) {
+  console.log(item_array);
+}
