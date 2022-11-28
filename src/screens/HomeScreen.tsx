@@ -16,8 +16,7 @@ import * as mutations from "../graphql/mutations";
 import { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import React from "react";
-import { printQRCodes } from "../QRService";
-import { listPlaces } from "../graphql/queries";
+import { printQRCodes, printInsuranceForm } from "../PrintService";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 Amplify.configure(AWSConfig);
@@ -133,10 +132,17 @@ export default function HomeScreen(props: homeProps) {
       <View style={styles.buttonView}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => printAll(residenceData, loading)} // print something
+          onPress={() => printAllInsurance(residenceData, loading)} // print all insurance info
+        >
+          <MaterialCommunityIcons name="printer" color={"#FFFFFF"} size={30} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => printAllQR(residenceData, loading)} // print all qr codes
         >
           <MaterialCommunityIcons name="qrcode" color={"#FFFFFF"} size={30} />
         </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => addItem(props.navigation, residenceData, loading)}
@@ -148,7 +154,7 @@ export default function HomeScreen(props: homeProps) {
   );
 }
 
-function printAll(residenceData: any, loading: boolean) {
+function printAllQR(residenceData: any, loading: boolean) {
   if (loading) {
     Alert.alert("Still loading data", "Please wait while your data is loaded", [
       {
@@ -169,6 +175,20 @@ function printAll(residenceData: any, loading: boolean) {
       });
     }).flat(1)
   );
+}
+
+function printAllInsurance(residenceData: any, loading: boolean) {
+  if (loading) {
+    Alert.alert("Still loading data", "Please wait while your data is loaded", [
+      {
+        text: "OK",
+        style: "cancel",
+      },
+    ]);
+    return;
+  }
+
+  printInsuranceForm(residenceData);
 }
 
 async function navigateItem(

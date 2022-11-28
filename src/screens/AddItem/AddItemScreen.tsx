@@ -59,36 +59,37 @@ export default function AddItemScreen(props: addItemProps) {
 
   return (
     <ScrollView style={styles.container}>
+      <Text style={styles.title}>Add New Item</Text>
       <Text style={styles.text}>Item name</Text>
       <TextInput
         onChangeText={onChangeName}
         style={styles.input}
-        placeholder="Item name"
+        placeholder="Enter item name here"
       />
       <Text style={styles.text}>Item description</Text>
       <TextInput
         onChangeText={onChangeDescription}
         multiline={true}
         style={styles.multyInput}
-        placeholder="Item description"
+        placeholder="Enter item description here"
         numberOfLines={4}
       />
-      <Text style={styles.text}>Room</Text>
+      <Text style={styles.text}>Select Room</Text>
       <Picker
         selectedValue={props.route.params.Places[selectedRoom]}
-        style={styles.input}
+        style={styles.picker}
         onValueChange={(itemValue, itemIndex) => {
           setSelectedRoom(itemIndex);
         }}
       >
         {renderRoomList()}
       </Picker>
-      <Text style={styles.text}>Container</Text>
+      <Text style={styles.text}>Select Container</Text>
       <Picker
         selectedValue={
           props.route.params.Places[selectedRoom]?.containers[selectedContainer]
         }
-        style={styles.input}
+        style={styles.picker}
         onValueChange={(itemValue, itemIndex) => {
           setSelectedConatainer(itemIndex);
         }}
@@ -115,7 +116,7 @@ export default function AddItemScreen(props: addItemProps) {
           )
         }
       >
-        <Text>Save Item</Text>
+        <Text style={styles.text}>Save Item</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -206,33 +207,45 @@ async function pathToImageFile(iName: string, imageUri: any) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
     flex: 1,
-  },
-  input: {
-    height: 150,
-    borderBottomColor: "lightblue",
-    borderBottomWidth: 2,
-    margin: 10,
-    backgroundColor: "white",
-  },
-  multyInput: {
-    backgroundColor: "white",
-    height: 60,
-    margin: 10,
-    borderBottomColor: "lightblue",
-    borderBottomWidth: 2,
-    textAlignVertical: "top",
+    backgroundColor: "#547C7D",
   },
   text: {
+    color: "lightblue",
+    fontSize: 25,
+  },
+  scrollv: {
+    flexGrow: 1,
+    justifyContent: "center",
+  },
+  input: {
+    height: 50,
+    borderBottomColor: "lightblue",
+    borderBottomWidth: 2,
     margin: 10,
-    marginBottom: 0,
+    fontSize: 20,
+  },
+  multyInput: {
+    height: 100,
+    borderBottomColor: "lightblue",
+    borderBottomWidth: 2,
+    margin: 10,
+    fontSize: 20,
   },
   button: {
     alignItems: "center",
-    backgroundColor: "lightblue",
+    backgroundColor: "black",
     padding: 10,
     margin: 10,
-    marginBottom: 30,
+    width: 400,
   },
+  title: {
+    fontSize: 45,
+    alignSelf: "center",
+    color: "lightblue",
+  },
+  picker: {
+    paddingBottom: 30,
+    backgroundColor: 'white',
+  }
 });
