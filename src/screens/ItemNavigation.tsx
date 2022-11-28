@@ -12,7 +12,7 @@ export default function ItemNavigation(props: any) {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{ headerShown: true }}
+      screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
         name="Rooms"
