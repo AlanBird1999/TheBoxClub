@@ -1,5 +1,5 @@
 ```
-Authors:    Alan Bird, Kevin Law, Eric Simons, and Tyler Grant
+Authors:    Alan Bird, Kevin Law, Eric Sims, and Tyler Grant
 Date:       31-August-2022
 Project:    Boxie
 ```
