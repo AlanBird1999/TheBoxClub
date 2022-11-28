@@ -20,10 +20,10 @@ export default function AddItemRoom(props: addRoomProps) {
   const [text, onChangeText] = React.useState("");
   return (
     <View style={styles.container}>
-      <Text>Room Name</Text>
+      <Text style={styles.title}>Add New Room</Text>
       <TextInput
         style={styles.input}
-        placeholder="Room Name"
+        placeholder="Enter room name here"
         onChangeText={onChangeText}
         value={text}
       />
@@ -37,7 +37,7 @@ export default function AddItemRoom(props: addRoomProps) {
         onPress={() => saveRoom(props.route.params, text, props.navigation)}
         style={styles.button}
       >
-        <Text>Save Room</Text>
+        <Text style={styles.text}>Save Room</Text>
       </TouchableOpacity>
     </View>
   );
@@ -72,20 +72,38 @@ async function saveRoom(
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    paddingBottom: 0,
     flex: 1,
+    backgroundColor: "#547C7D",
+    justifyContent: "center",
+  },
+  text: {
+    color: "lightblue",
+    fontSize: 25,
+  },
+  scrollv: {
+    flexGrow: 1,
+    justifyContent: "center",
   },
   input: {
     height: 50,
     borderBottomColor: "lightblue",
     borderBottomWidth: 2,
     margin: 10,
+    fontSize: 20,
   },
   button: {
     alignItems: "center",
-    backgroundColor: "lightblue",
+    backgroundColor: "black",
     padding: 10,
     margin: 10,
+    width: 400,
   },
+  title: {
+    fontSize: 45,
+    alignSelf: "center",
+    color: "lightblue",
+  },
+  picker: {
+    paddingBottom: 30,
+  }
 });

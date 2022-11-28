@@ -5,6 +5,8 @@ import {
   Text,
   TouchableOpacity,
   Alert,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
@@ -36,15 +38,19 @@ export default function AddContainerScreen(props: addContainerProps) {
 
   return (
     <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollv}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <View style={styles.container}>
+      <Text style={styles.title}>Add New Container</Text>
       <TextInput
         style={styles.input}
         onChangeText={onChangeName}
-        placeholder="Container name"
+        placeholder="Enter container name here"
       />
-      <Text style={styles.text}>Room</Text>
+      <Text style={styles.text}>Select Room</Text>
       <Picker
         selectedValue={residence.Places[selectedRoom]}
-        style={styles.input}
+        style={styles.picker}
         onValueChange={(itemValue, itemIndex) => {
           setSelectedRoom(itemIndex);
         }}
@@ -52,6 +58,7 @@ export default function AddContainerScreen(props: addContainerProps) {
         {renderRoomList()}
       </Picker>
       <TouchableOpacity
+        style={styles.button}
         onPress={() =>
           saveContainer(
             residence.Places[selectedRoom],
@@ -60,8 +67,11 @@ export default function AddContainerScreen(props: addContainerProps) {
           )
         }
       >
-        <Text>Save Container</Text>
+        <Text style={styles.text}>Save Container</Text>
       </TouchableOpacity>
+    </View>
+    </KeyboardAvoidingView>
+      </ScrollView>
     </View>
   );
 }
@@ -128,18 +138,39 @@ async function saveContainer(
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    paddingBottom: 0,
     flex: 1,
+    backgroundColor: "#547C7D",
+    justifyContent: "center",
+  },
+  text: {
+    color: "lightblue",
+    fontSize: 25,
+  },
+  scrollv: {
+    flexGrow: 1,
+    justifyContent: "center",
   },
   input: {
     height: 50,
     borderBottomColor: "lightblue",
     borderBottomWidth: 2,
     margin: 10,
+    fontSize: 20,
   },
-  text: {
+  button: {
+    alignItems: "center",
+    backgroundColor: "black",
+    padding: 10,
     margin: 10,
-    marginBottom: 0,
+    width: 400,
   },
+  title: {
+    fontSize: 45,
+    alignSelf: "center",
+    color: "lightblue",
+  },
+  picker: {
+    paddingBottom: 30,
+    backgroundColor: 'white',
+  }
 });
