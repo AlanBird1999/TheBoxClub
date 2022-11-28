@@ -171,5 +171,6 @@ const styles = StyleSheet.create({
   },
   picker: {
     paddingBottom: 30,
+    backgroundColor: 'white',
   }
 });
