@@ -6,7 +6,9 @@ import SignIn from "./src/screens/SignIn";
 import SignUp from "./src/screens/SignUp";
 import { TabNavigator } from "./src/screens/TabNavigator";
 import PasswordResetScreen from "./src/components/PasswordReset";
-import EmailResetScreen from "./src/components/EmailReset";
+import ForgotPasswordScreen, {
+  PasswordCodeScreen,
+} from "./src/components/ForgotPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +24,8 @@ export default function App_Navigator() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="TabNav" component={TabNavigator} />
         <Stack.Screen name="ChangePassword" component={PasswordResetScreen} />
-        <Stack.Screen name="ChangeEmail" component={EmailResetScreen} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen name="ResetPasswordCode" component={PasswordCodeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

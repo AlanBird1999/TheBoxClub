@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   Alert,
   Keyboard,
+  Button,
 } from "react-native";
 import Amplify, { Auth } from "aws-amplify";
 import AWSConfig from "../aws-exports";
@@ -159,6 +160,13 @@ export default function LoginScreen(props: loginProps) {
               secureTextEntry={true}
               onChangeText={(value) => changeText("password", value)}
             />
+            <View>
+              <Button
+                color={"bisque"}
+                title="Forgot Password?"
+                onPress={() => props.navigation.navigate("ForgotPassword")}
+              />
+            </View>
             <TouchableOpacity
               onPress={() => login(props.navigation)}
               style={styles.button}

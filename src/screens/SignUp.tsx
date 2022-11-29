@@ -128,12 +128,7 @@ export default function LoginScreen(props: loginProps) {
         <KeyboardAvoidingView style={styles.container} behavior="padding">
           <SafeAreaView>
             <ScrollView keyboardShouldPersistTaps="handled">
-              <Text
-                style={styles.title}
-                onPress={() => props.navigation.navigate("TabNav")}
-              >
-                B O X I E
-              </Text>
+              <Text style={styles.title}>B O X I E</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Email Address"
