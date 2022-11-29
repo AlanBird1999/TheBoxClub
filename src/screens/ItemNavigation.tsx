@@ -4,6 +4,7 @@ import React from "react";
 import Item_Screen from "./ItemScreen";
 import Item_View_Screen from "../components/ItemView";
 import PasswordResetScreen from "../components/PasswordReset";
+import ForgotPasswordScreen from "../components/ForgotPassword";
 import HomeScreen from "./HomeScreen";
 
 const Stack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ export default function ItemNavigation(props: any) {
       <Stack.Screen name="ItemScreen" component={Item_Screen} />
       <Stack.Screen name="ItemViewScreen" component={Item_View_Screen} />
       <Stack.Screen name="PasswordResetScreen" component={PasswordResetScreen}/>
+      <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen}/>
     </Stack.Navigator>
   );
 }

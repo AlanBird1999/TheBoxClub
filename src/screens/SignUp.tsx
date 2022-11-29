@@ -128,22 +128,21 @@ export default function LoginScreen(props: loginProps) {
         <KeyboardAvoidingView style={styles.container} behavior="padding">
           <SafeAreaView>
             <ScrollView keyboardShouldPersistTaps="handled">
-              <Text
-                style={styles.title}
-                onPress={() => props.navigation.navigate("TabNav")}
-              >
-                B O X I E
-              </Text>
+              <Text style={styles.title}>B O X I E</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Email Address"
                 keyboardType="email-address"
+                autoCapitalize={'none'}
+                autoCorrect={false}
                 onChangeText={(value) => changeText("username", value)}
               />
               <TextInput
                 style={styles.input}
                 placeholder="Password"
                 keyboardType="default"
+                autoCapitalize={'none'}
+                autoCorrect={false}
                 secureTextEntry={true}
                 onChangeText={(value) => changeText("password", value)}
               />
@@ -155,7 +154,7 @@ export default function LoginScreen(props: loginProps) {
                 <TextInput
                   style={styles.input}
                   placeholder="Confirmation Code (for sign up)"
-                  keyboardType="default"
+                  keyboardType="numeric"
                   onChangeText={(value) => changeText("confirmation", value)}
                 />
                 <TouchableOpacity

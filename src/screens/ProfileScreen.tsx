@@ -37,22 +37,12 @@ export default function ProfileScreen(props: profileProps) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => changeEmail(props.navigation)}
-      >
-        <Text style={styles.text}>Change email</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
         onPress={() => logout(props.navigation)}
       >
         <Text style={styles.text}>Log Out</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
-}
-
-function changeEmail(navigation: any) {
-  navigation.navigate("ChangeEmail");
 }
 
 function changePassword(navigation: any) {
