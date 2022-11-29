@@ -40,7 +40,9 @@ export default function ForgotPasswordScreen(props: resetProps) {
                 onChangeEmail(text);
               }}
               placeholder="Enter Email"
-              keyboardType="default"
+              keyboardType="email-address"
+              autoCorrect={false}
+              autoCapitalize={'none'}
               secureTextEntry={false}
             />
             <TouchableOpacity

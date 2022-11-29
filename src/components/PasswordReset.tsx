@@ -48,7 +48,7 @@ export default function PasswordResetScreen(props: resetProps) {
               <Button
                 color={"bisque"}
                 title="Forgot password? Click here"
-                onPress={() => props.navigation.navigate("Profile")}
+                onPress={() => props.navigation.navigate("ForgotPassword")}
               />
             </View>
             <TextInput
