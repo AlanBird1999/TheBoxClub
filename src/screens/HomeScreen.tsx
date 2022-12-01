@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  TextInput,
 } from "react-native";
 import Amplify, { Auth } from "aws-amplify";
 import AWSConfig from "../aws-exports";
@@ -18,7 +19,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import React from "react";
 import { printQRCodes, printInsuranceForm } from "../PrintService";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
+import Item from "../components/Item";
 Amplify.configure(AWSConfig);
 
 interface homeProps {
@@ -30,6 +31,8 @@ export default function HomeScreen(props: homeProps) {
   const [residenceData, setResidenceData] = useState(null);
   const [roomData, setRoomData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
+  const [resultList, setResultList] = useState(null);
   // TODO possible logic for reload only on command?
   // if props.route.params.reloadItems setResidenceData(null);
   if (residenceData == null)
@@ -117,18 +120,39 @@ export default function HomeScreen(props: homeProps) {
           />
           <Text style={styles.loadingText}>Loading...</Text>
         </View>
-      ) : null}
-      <FlatList
-        numColumns={1}
-        data={roomData}
-        renderItem={({ item }) => (
-          <Room
-            name={item.pName}
-            nav={props.navigation}
-            containers={item.containers}
-          ></Room>
-        )}
-      />
+      ) : (
+        <TextInput
+          style={styles.input}
+          placeholder="Search for items"
+          onChangeText={(text) => {
+            setSearchText(text);
+            onChangeSearchText(text, setResultList, residenceData);
+          }}
+          value={searchText}
+        />
+      )}
+      {searchText ? (
+        <FlatList
+          numColumns={1}
+          data={resultList}
+          renderItem={({ item }) => (
+            <Item item={item} navigation={props.navigation}></Item>
+          )}
+        />
+      ) : (
+        <FlatList
+          numColumns={1}
+          data={roomData}
+          renderItem={({ item }) => (
+            <Room
+              name={item.pName}
+              nav={props.navigation}
+              containers={item.containers}
+            ></Room>
+          )}
+        />
+      )}
+
       <View style={styles.buttonView}>
         <TouchableOpacity
           style={styles.button}
@@ -152,6 +176,23 @@ export default function HomeScreen(props: homeProps) {
       </View>
     </SafeAreaView>
   );
+}
+
+function onChangeSearchText(
+  text: string,
+  setResultList: any,
+  residenceData: any
+) {
+  let items = residenceData.Places.map((place: any) => {
+    return place.containers.map((container: any) => {
+      return container.items;
+    });
+  }).flat(2);
+  items = items.filter((item: any) => {
+    const iName = item.iName.toLowerCase();
+    return iName.includes(text.toLocaleLowerCase());
+  });
+  setResultList(items);
 }
 
 function printAllQR(residenceData: any, loading: boolean) {
@@ -355,9 +396,13 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    borderBottomColor: "lightblue",
-    borderBottomWidth: 2,
-    margin: 10,
+    width: "90%",
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 30,
+    borderRadius: 20,
+    paddingLeft: 20,
+    backgroundColor: "white",
   },
   buttonView: {
     position: "absolute",
