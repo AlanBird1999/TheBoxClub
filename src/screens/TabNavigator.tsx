@@ -41,7 +41,6 @@ export function TabNavigator() {
           ),
         }}
       ></Tab.Screen>
-
       <Tab.Screen
         name="Scan"
         component={CScanner}

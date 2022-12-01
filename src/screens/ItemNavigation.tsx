@@ -13,7 +13,7 @@ export default function ItemNavigation(props: any) {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: true }}
     >
       <Stack.Screen
         name="Rooms"
@@ -32,8 +32,14 @@ export default function ItemNavigation(props: any) {
       />
       <Stack.Screen name="ItemScreen" component={Item_Screen} />
       <Stack.Screen name="ItemViewScreen" component={Item_View_Screen} />
-      <Stack.Screen name="PasswordResetScreen" component={PasswordResetScreen}/>
-      <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen}/>
+      <Stack.Screen
+        name="PasswordResetScreen"
+        component={PasswordResetScreen}
+      />
+      <Stack.Screen
+        name="ForgotPasswordScreen"
+        component={ForgotPasswordScreen}
+      />
     </Stack.Navigator>
   );
 }
