@@ -1,8 +1,7 @@
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
-import { API, Amplify, Storage } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import {
-  View,
   ScrollView,
   StyleSheet,
   TextInput,
@@ -11,6 +10,7 @@ import {
   Alert,
 } from "react-native";
 import ImagePicker from "../../components/ImagePicker";
+import { Buffer } from "buffer";
 
 interface addItemProps {
   navigation: any;
@@ -194,9 +194,12 @@ async function saveItem(
 
 async function pathToImageFile(iName: string, imageUri: any) {
   try {
+    let imageName = Buffer.from(iName + Date.now(), "binary").toString(
+      "base64"
+    );
     const response = await fetch(imageUri);
     const blob = await response.blob();
-    return await Storage.put(iName, blob, {
+    return await Storage.put(imageName, blob, {
       contentType: "image/jpeg",
       expires: new Date("2023-1-1"),
     });
@@ -246,6 +249,6 @@ const styles = StyleSheet.create({
   },
   picker: {
     paddingBottom: 30,
-    backgroundColor: 'white',
-  }
+    backgroundColor: "white",
+  },
 });
